@@ -4,12 +4,26 @@
 " NOTE THAT DOUBLE QUOTE PRECEDES A COMMENT
 " SINGLE QUOTES WILL BE USED TO REFER TO THINGS RATHER THAN DOUBLE QUOTES
 
+
+
+"VIMRC AND MACROING
+"Default settings will be saved in ~/.vimrc
+"You can change default settings by editing this file
+"You can also change vim's settings in the session of vim you are running. They will be reset to default next time you open vim
+"You can set the option '_____' with 'set _____'
+"You can map key presses with 'map <BUTTON> :_____' where '_____' is the command
+"You can map multiple commands to a button by feeding multiple commands separated by spaces?
+
 "See https://dougblack.io/words/a-good-vimrc.html for more recommendations
 
-"Enable pathogen plugin manager
+
+
+"ENABLE THE PATHOGEN PLUGIN MANAGER
 "See https://github.com/tpope/vim-pathogen
 execute pathogen#infect()
 execute pathogen#helptags()
+
+
 
 "MODES
 ""vim has 4 modes. STANDARD, INSERT, REPLACE, and VISUAL
@@ -27,6 +41,7 @@ execute pathogen#helptags()
 "'v'    starts visual mode for selecting the lines and you can perform operation on that like d to delete
 "the most recently deleted or yanked line will occupy the vim register; paste the register with 'p'
 "Make a visual block with '<Ctrl>+V'. This allows you to do the same process on multiple lines.
+
 
 
 "MOVING AROUND
@@ -128,6 +143,7 @@ set incsearch        "search as characters are entered
 set hlsearch         "highlight matches
 
 
+
 "SHELL COMMANDS AND MORE ON WRITING FILES
 "':!_____'           to run the shell command '_____' like :!dir, :!ls
 
@@ -151,6 +167,8 @@ set dictionary+=$HOME/.vim/spell/en.utf-8.add
 "custom words
 set spellfile=$HOME/.vim/spell/en.utf-8.add
 
+
+
 "AESTHETIC OPTIONS
 "colorscheme slate   "define colorscheme
 "try ':colorscheme <CTRL+D>' to see a list of colorschemes
@@ -161,9 +179,12 @@ set showcmd             "shows the last command entered in the bottom right corn
 "set relativenumber     "makes active line number the absolute file line number and non-active line numbers the line number away from the active one
 "set cursorline         "draws line under the line being edited
 
+
+
 "PATHOGEN FILETYPE PLUGIN OPTIONS
 filetype on
 filetype plugin on
+
 
 
 "SHELL TAB COMPLETION IN VIM (WILDMENU)
@@ -173,6 +194,7 @@ filetype plugin on
 "Press '<CTRL>+D'    to list commands that begin with what you've already typed
 set wildmenu "lists tab completion recommendations on a special command in vim ':_____'
 set wildmode=list,full "list all matches and complete each full match. See ':help wildmode'
+
 
 
 "WHITESPACE OPTIONS
@@ -186,7 +208,9 @@ inoremap <S-Tab> <C-V><Tab> "force a normal tab character
 "autocmd FileType html setlocal shiftwidth=2 tabstop=2
 "autocmd FileType python setlocal expandtab shiftwidth=4 softtabstop=4
 
-"Split options
+
+
+"SPLIT OPTIONS
 "to see the same file,
 "open a horizontal split with :split or :sp 
 "open a vertical split with :vsplit or :vs
@@ -205,20 +229,17 @@ inoremap <S-Tab> <C-V><Tab> "force a normal tab character
 set splitbelow
 set splitright
 
-"VIMRC AND MACROING
-"Default settings will be saved in ~/.vimrc
-"You can change default settings by editing this file
-"You can also change vim's settings in the session of vim you are running. They will be reset to default next time you open vim
-"You can set the option '_____' with 'set _____'
-"You can map key presses with 'map <BUTTON> :_____' where '_____' is the command
-"You can map multiple commands to a button by feeding multiple commands separated by spaces?
 
-"'q' will record a macro. Give it a name e.g. '@_', where _ is a letter, and enter the process you want the macro to do. Finally press q again to stop recording
+
+"MACROING
+""'q' will record a macro. Give it a name e.g. '@_', where _ is a letter, and enter the process you want the macro to do. Finally press q again to stop recording
 "To call the macro, simply type '@_'
 "Or you can precede '@_' with the number of times you want it to occur. E.g. 23@a will repeat the macro a 23 times.
 "Additionally, '.' will repeat the process of whatever you did last.
 
 "set lazyredraw      "redraws screen only when needed; speeds up macros
+
+
 
 "AUTOCOMPILE 
 "Press F6 when editing a .tex file to save and compile a pdf. Useful to monitor changes to the file
@@ -226,19 +247,25 @@ set splitright
 "same for R markdown
 "autocmd Filetype rmd map <F6> :w<RETURN>:!echo<space>"require(rmarkdown);<space>render('<c-r>%')"<space>\|<space>R<space>--vanilla<enter><RETURN>
 
+
+
 "LEADERS AND TAG SHORTUCTS 
 "I have set a leader key to be used to let vim know that I want
 "to do some sort of custom remapped command, i.e. those just below this
 let mapleader =","
-"
-"Navigating with guides
-"<++> characters may appear. <leader><leader> will
+
+
+
+"NAVIGATING WITH GUIDES 
+""<++> characters may appear when doing an HTML macro as below. <leader><leader> will
 "act as a shortcut to jump to and overwrite these characters.
 "
 inoremap <leader><leader> <Esc>/<++><Enter>"_c4l
 vnoremap <leader><leader> <Esc>/<++><Enter>"_c4l
 map <leader><leader> <Esc>/<++><Enter>"_c4l
-"Copy/cut/paste to system clipboards
+
+
+"COPY/CUT/PASTE WITH SYSTEM CLIPBOARDS
 "in visual mode copy/cut/paste to CLIPBOARD (freedesktop.org specification, CTRL+C/CTRL+V)
 vnoremap <leader>y "+y
 vnoremap <leader>x "+x
@@ -252,13 +279,13 @@ nnoremap <leader>y "+y
 nnoremap <leader>x "+x
 nnoremap <leader>p "+p
 "in normal mode copy/cut/paste to PRIMARY (freedesktop.org specification, Highlight/Shift+Insert)
-
 nnoremap <leader>Y "*y
 nnoremap <leader>X "*x
 nnoremap <leader>P "*p
-"
-"
-"HTML
+
+
+
+"HTML MACROS
 autocmd FileType html nmap <leader>b i<b></b><Space><++><Esc>FbT>i
 autocmd FileType html nmap <leader>it i<em></em><Space><++><Esc>FeT>i
 autocmd FileType html nmap <leader>h1 i<h1></h1><Enter><Enter><++><Esc>2kf<i
@@ -303,7 +330,7 @@ autocmd FileType html nmap è &egrave;
 autocmd FileType html nmap ì &igrave;
 autocmd FileType html nmap ò &ograve;
 autocmd FileType html nmap ù &ugrave;
-"LATEX
+"LATEX MACROS
 autocmd FileType tex map <leader>w :w !detex \| wc -w<CR>
 autocmd FileType tex nmap <leader>fr i\begin{frame}<Enter>\frametitle{}<Enter><Enter><++><Enter><Enter>\end{frame}<Enter><Enter><++><Esc>6kf}i
 autocmd FileType tex nmap <leader>fi i\begin{fitch}<Enter><Enter>\end{fitch}<Enter><Enter><++><Esc>3kA
@@ -346,16 +373,22 @@ autocmd FileType bib nmap <leader>b i@book{<Enter>author<Space>=<Space>{<++>},<E
 autocmd FileType bib nmap <leader>c i@incollection{<Enter>author<Space>=<Space>{<++>},<Enter>title<Space>=<Space>{<++>},<Enter>booktitle<Space>=<Space>{<++>},<Enter>editor<Space>=<Space>{<++>},<Enter>year<Space>=<Space>{<++>},<Enter>publisher<Space>=<Space>{<++>},<Enter>}<Enter><++><Esc>8kA,<Esc>i
 
 
-"Vim-Mathematica
+
+"VIM-MATHEMATICA PLUGIN SETTINGS
+"for editing mathematica plain-text scripts
 let g:mma_candy = 1 
 set encoding=utf-8
 set fileencoding=utf-8
 
-"AutoComplPop settings 
-"what of this works without AutoCompPop installed?
+
+
+"AUTOCOMPLPOP PLUGIN SETTINGS
+"extension for auto-completion
+"
 "autocomplete from the spell check dictionary
 "set complete+=kspell  "this is not needed/doesn't work?
-"Autocomplete will show completions for only one recommendation
+"
+"Autocomplete will show completions when there is only one recommendation
 set completeopt=menuone
 "suppresses output on bottom of screen for selections
 set shortmess+=c
@@ -376,7 +409,8 @@ inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<Up>"
 set pumheight=8 "how many recommendations to give default is all space (100?)
 
 
-"Syntastic settings
+
+"SYNTASTIC SETTINGS
 "checks syntax opens recommendations in new split
 "options for output window?
 set statusline+=%#warningmsg#
