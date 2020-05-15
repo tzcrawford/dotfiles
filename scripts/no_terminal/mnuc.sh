@@ -1,4 +1,6 @@
 #!/bin/bash
+#for album art backgrounds in ncmpccpp running in urxvt
+
 #Requires the ability to printf images to terminal. Dependency rxvt-unicode-pixbuf
 #https://aur.archlinux.org/packages/rxvt-unicode-pixbuf/
 

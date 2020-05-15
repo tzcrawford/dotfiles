@@ -1,5 +1,7 @@
 #!/bin/sh
-#Converts a pdf to one with searchable text (OCR) on arch systems
+#Converts a pdf to one with searchable text (OCR)
+#originally meant for arch systems but technically applicable elsewhere
+
 #If imagemagick fails to convert pdf to jpg due to a security policy, follow guide here: 
 #https://stackoverflow.com/questions/52998331/imagemagick-security-policy-pdf-blocking-conversion
 #add:

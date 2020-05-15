@@ -1,4 +1,6 @@
 #!/usr/bin/python
+#sometimes you mess up your deilimiter-separated plaintext data files and you have to do quick math on every element in a column
+
 import math
 #here a is data, b is argument
 def multiply(a,b):

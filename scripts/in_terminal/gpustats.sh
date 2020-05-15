@@ -1,5 +1,6 @@
 #!/bin/sh
 #Prints information about GPU usage
+
 #VLOAD is the percent of cores being utilized (I think)
 #VRAMRAT is the percent of VRAM being utilized
 #VLOAD=$(sudo cat /sys/kernel/debug/dri/0/amdgpu_pm_info | grep "GPU Load:" | sed -e 's/GPU Load: //' | sed -e 's/ //')

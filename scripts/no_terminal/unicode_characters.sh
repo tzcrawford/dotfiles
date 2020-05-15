@@ -1,4 +1,6 @@
 #!/bin/sh
+#use dmenu to select an arbitrary unicode character (e.g. emoji) and copy to clipboard
+
 #REQUIRES XCLIP. IF NOT INSTALLED, RUN:
 #sudo pacman -S xclip
 #Will also want noto-fonts-emoji and ttf-symbola(AUR)

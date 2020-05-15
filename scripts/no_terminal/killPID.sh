@@ -1,4 +1,6 @@
 #!/bin/sh
+#use dmenu to select a linux process and kill -9 it
+
 SELECTION=$(ps ax | sed '1d' | dmenu -i -l 15 -fn Monospace-18 -nb '#2c2c2e' -nf '#d12e75' -sb '#040404' -sf '#ff006f')
 #ps ax gives list of all processes
 #sed command removes header line

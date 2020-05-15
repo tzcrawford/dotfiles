@@ -1,9 +1,15 @@
 #!/usr/bin/python
+#Will perform a linear fit on any delimiter-separated plaintext data file
+#could modify for more complex function
+#really meant for experimental data, does error analysis and outputs chi square and relevant info
+
+#select how you want to handle your expected errors with either scolumn, constanterr, or relativeerr
+
 import numpy as np
 from scipy.optimize import curve_fit
 
-inputfile="/home/enrico/data.csv"
-outputfile="/home/enrico/data_out.txt"
+inputfile="$HOME/data.csv"
+outputfile="$HOME/data_out.txt"
 delimiter=","
 numheaderlines=1
 xcolumn=1 #column independent variable data is saved, counting from 1
