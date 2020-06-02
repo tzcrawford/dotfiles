@@ -2,7 +2,7 @@
 #updates arch linux system
 
 #make sure we are on arch linux
-if ! lsb_release -a | grep "Arch Linux\|Manjaro" > /dev/null; then
+if ! ( lsb_release -a | grep "Arch Linux\|Manjaro" > /dev/null ); then
     echo "Are you on arch linux??"
     exit
 fi
