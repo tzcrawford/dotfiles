@@ -242,10 +242,10 @@ set splitright
 
 
 "AUTOCOMPILE 
-"Press F6 when editing a .tex file to save and compile a pdf. Useful to monitor changes to the file
-"autocmd FileType tex map <F6> :w<RETURN>:!pdflatex %<RETURN><RETURN>
+"Press FX when editing a .tex file to save and compile a pdf. Useful to monitor changes to the file
+"autocmd FileType tex map <FX> :w<RETURN>:!pdflatex %<RETURN><RETURN>
 "same for R markdown
-"autocmd Filetype rmd map <F6> :w<RETURN>:!echo<space>"require(rmarkdown);<space>render('<c-r>%')"<space>\|<space>R<space>--vanilla<enter><RETURN>
+"autocmd Filetype rmd map <FX> :w<RETURN>:!echo<space>"require(rmarkdown);<space>render('<c-r>%')"<space>\|<space>R<space>--vanilla<enter><RETURN>
 
 
 
@@ -417,12 +417,35 @@ set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
+"run the check (have to save the buffer first)
+map <F6> :SyntasticCheck<Return>
+"clear the error list
+map <F7> :SyntasticReset<Return>
+
+"Syntastic default mode, can be set for each filetype in the arrays
+let g:syntastic_mode_map = {
+    \ "mode": "passive",
+    \ "active_filetypes": [],
+    \ "passive_filetypes": [] }
+
 "checks syntax on file open
-let g:syntastic_check_on_open = 1
-"checks syntax on file :w or :wq
+let g:syntastic_check_on_open = 0
+"checks syntax on :wq :x or :ZZ if 1
 let g:syntastic_check_on_wq = 0
+
+"Always put detected errors in the list (can conflict w other plugins)
+let g:syntastic_always_populate_loc_list = 1
+
+"0 - error window not opened/closed automatically.
+"1 - error window automatically opened when errors detected, closed when none are detected. (default)
+"2 - error window automatically closed when no errors are detected, but not opened automatically.
+"3 - error window automatically opened when errors are detected, but not closed automatically.
+let g:syntastic_auto_loc_list = 1
+"how tall the syntastic list is
+let g:syntastic_loc_list_height = 7
+
+"How syntastic split title bar looks
+let g:syntastic_stl_format = "[Syntax! line: %F | %E{Total Errors: %e} | %W{Total Warnings: %w}]"
 
 "go between next and previous matches
 nnoremap <leader><C-j> :lnext<CR>
