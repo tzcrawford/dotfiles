@@ -1,1 +1,0 @@
-/home/serpent/scripts/dotfiles/.vim
