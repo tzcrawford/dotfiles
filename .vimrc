@@ -457,3 +457,4 @@ nnoremap <leader><C-k> :lprevious<CR>
 "on arch in a build directory: 
 "git clone https://aur.archlinux.org/nvim-r.git; cd nvim -r; makepkg -si
 "nothing has to be added to .vimrc to enable
+"in sudo R shell, run install.packages("rmarkdown")
