@@ -451,10 +451,3 @@ let g:syntastic_stl_format = "[Syntax! line: %F | %E{Total Errors: %e} | %W{Tota
 nnoremap <leader><C-j> :lnext<CR>
 nnoremap <leader><C-k> :lprevious<CR>
 
-
-"ADD nvim-r PACKAGE
-"https://github.com/jalvesaq/Nvim-R
-"on arch in a build directory: 
-"git clone https://aur.archlinux.org/nvim-r.git; cd nvim -r; makepkg -si
-"nothing has to be added to .vimrc to enable
-"in sudo R shell, run install.packages("rmarkdown")
