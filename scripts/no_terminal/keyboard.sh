@@ -1,5 +1,3 @@
-#Keyboard remaps using xmodmap
-#changing mod/super button settings because i3 more easily navigated with mod in ALT key location
 xmodmap -e "clear mod1"
 xmodmap -e "clear mod4"
 xmodmap -e "keycode 133 = Alt_L"
