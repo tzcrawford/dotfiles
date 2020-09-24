@@ -19,4 +19,4 @@ w_scan2 -fa -A$2 -c US -X | sed 's/VSB_8/8VSB/g'| tee $1
 #-A3 is both
 #-c US for country US
 #-X for a/c/tzap/xine format
-#sed command is needed to change VSB_8 to
+#sed command is needed to change VSB_8 to 8VSB because syntax
