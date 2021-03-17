@@ -1,9 +1,9 @@
 #!/bin/bash
-#updates arch linux system
+# Updates arch linux system
 
 #make sure we are on arch linux
 if ! ( lsb_release -a | grep "Arch Linux\|Manjaro" > /dev/null ); then
-    echo "Are you on arch linux??"
+    echo "Are you on Arch Linux??"
     exit
 fi
 #Sometimes the keyring gets broken, run this if you get gpg errors
@@ -15,10 +15,10 @@ case $response in
         ;;
 esac
 
-#update official repo packages
+echo "updating official repo packages..."
 sudo pacman -Syu
 
-#update AUR packages
+echo "updating AUR packages..."
 #yaourt -Syu --aur
 yay -Syu --aur
 

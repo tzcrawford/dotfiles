@@ -13,11 +13,11 @@ PROCESSNAME=$(echo $SELECTION | cut -d " " -f1,2,3,4 --complement | tr -d '\n')
 CONFIRMATION=$(echo -e "yes\nno" | dmenu -i -l 15 -fn Monospace-18 -nb '#2c2c2e' -nf '#d12e75' -sb '#040404' -sf '#ff006f' -p "Are you sure you want to kill $PROCESSNAME?" | awk '{print $1}' | tr -d '\n')
 if [ $CONFIRMATION == "yes" ]; then
     if $( kill -9 $PID );then
-        notify-send "PID $PID killed"
+        notify-send -u low "PID $PID killed"
     else
         notify-send "PID $PID kill failed!"
     fi
 else
-    notify-send "No action taken on PID $PID"
+    notify-send -u low "No action taken on PID $PID"
 fi
 

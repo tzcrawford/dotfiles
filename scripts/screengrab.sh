@@ -1,7 +1,10 @@
 #!/bin/sh
-#Will record whole screen with default alsa input audio (mic)
-#$1 is the output file name
-#$2 if exists is the pulse audio card source, else defaults to 4. To determine, run `pactl list sources | less` and search through the "Sources". The script is hard-coded for audio card 1 `-ac 1`
+# Will record whole screen with default alsa input audio (mic)
+
+# $1 is the output file name
+# $2 if exists is the pulse audio card source, else defaults to 4. To determine, run `pactl list sources | less` and search through the "Sources". The script is hard-coded for audio card 1 `-ac 1`
+# usage:
+#   screengrab.sh "output.mp4" ["2"]
 
 if [ -z "$2" ]
   then
@@ -17,7 +20,7 @@ ffmpeg -y \
 -i :0.0 \
 -f pulse -ac 1 -i $audiosource \
 -c:v libx264 -r 30 -preset ultrafast -c:a aac \
-$1 
+"$1"
 
 #-c:v libx264 -r 30 -c:a aac $1
 #-f alsa -i default \

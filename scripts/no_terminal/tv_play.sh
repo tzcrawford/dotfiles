@@ -1,5 +1,5 @@
 #!/bin/sh
-#get a list of available channels, select one from dmenu, and play it on a chosen tuner
+# Get a list of available channels, select one from dmenu, and play it on a chosen tuner
 
 #get the channel name with dmenu
 locChannelConfig=~/.config/azap/channels.conf

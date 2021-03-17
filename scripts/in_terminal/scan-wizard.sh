@@ -1,5 +1,5 @@
 #!/bin/sh
-#wizard to scan pdfs with
+# Wizard to scan pdfs with
 
 Yes_No ()
 {

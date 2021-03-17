@@ -1,6 +1,6 @@
-#!/bin/bash
+#!/bin/sh
 # record ATSC transport stream
-# can do so for periods not divisible by one minute (bc is used instead of bash math)
+# can do so for periods not divisible by one minute (bc is used instead of sh math)
 
 configfile=~/.config/azap/channels.conf
 outputdir=~/Captures

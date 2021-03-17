@@ -8,6 +8,7 @@
 
 if lsb_release -a | grep "Arch Linux" > /dev/null; then
 if ! pacman -Q | grep w_scan2 ;then
+    echo "You need to install the w_scan2 package"
     yay -S w_scan2
 fi
 fi
@@ -19,4 +20,4 @@ w_scan2 -fa -A$2 -c US -X | sed 's/VSB_8/8VSB/g'| tee $1
 #-A3 is both
 #-c US for country US
 #-X for a/c/tzap/xine format
-#sed command is needed to change VSB_8 to 8VSB because syntax
+#sed command is needed to change VSB_8 to 8VSB because syntax. Why does it output in that way?
