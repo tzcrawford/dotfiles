@@ -148,6 +148,7 @@ set hlsearch         "highlight matches
 "':!_____'           to run the shell command '_____' like :!dir, :!ls
 
 
+
 "SPELLCHECKER
 "turn on spellchecker with language US
 map <F5> :setlocal spell! spelllang=en_us<Return>
@@ -265,6 +266,7 @@ vnoremap <leader><leader> <Esc>/<++><Enter>"_c4l
 map <leader><leader> <Esc>/<++><Enter>"_c4l
 
 
+
 "COPY/CUT/PASTE WITH SYSTEM CLIPBOARDS
 "in visual mode copy/cut/paste to CLIPBOARD (freedesktop.org specification, CTRL+C/CTRL+V)
 vnoremap <leader>y "+y
@@ -282,6 +284,113 @@ nnoremap <leader>p "+p
 nnoremap <leader>Y "*y
 nnoremap <leader>X "*x
 nnoremap <leader>P "*p
+
+
+
+"AUTOCOMPLETION
+"uses AUTOCOMPLPOP extension for on-the-fly auto-completion
+set omnifunc=syntaxcomplete#Complete "Use all syntax completion options all the time
+"au FileType cs set omnifunc=syntaxcomplete#Complete
+
+"autocomplete from the spell check dictionary
+"set complete+=kspell  "this is not needed since we added the spell file to the dictionary
+
+"Autocomplete will show completions when there is only one recommendation
+set completeopt=menuone
+"suppresses output on bottom of screen for selections
+set shortmess+=c
+
+"Ignore case for autocompletion recommendations (1 i.e. true is default)
+let g:acp_ignorecaseOption = 1
+"Length of keyword characters before the cursor needed to attempt keyword completion
+let g:acp_behaviorKeywordLength = 1
+
+"Ctrl+e will make autocomplete menu go away
+"remap carriage return/enter so that it doesn't autocomplete,
+inoremap <expr> <CR> pumvisible() ? '<C-e><CR>' : '<CR>'
+
+
+"Fill with your selection using CTRL+l
+"remap Ctrl+l to select first option in autocomplete if menu has spawned
+"inoremap <expr> <C-l> pumvisible() ? '<CR>' : '<CR>' "This one does not run menu manually (below)
+
+"Likewise, manually spawn *syntax* autocomplete menu with a CTRL+l in insertmode. 
+"This is necessary for filling object attributes/methods in python etc. 
+"Autocomplpop does not fill starting on period.
+inoremap <expr> <C-l> pumvisible() ? '<CR>' : '<C-x><C-o>' "Use this instead of above
+
+"Or Ctrl+u to switch from dictionary recommendation to *syntax* recommendations
+inoremap <expr> <C-u> pumvisible() ? '<C-e><C-x><C-o>' : '<C-x><C-o>'
+
+"Instead of filling like above, you cycle throught the list replacing what you type 
+"w/ Ctrl+n or Ctrl+p or with Ctrl+j or Ctrl+k with these remaps
+inoremap <expr> <C-j> pumvisible() ? "\<C-n>" : "\<Down>"
+inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<Up>"
+
+"How much space the autocomplete menu takes up
+set pumheight=8 "how many recommendations to give default is all space (100?)
+
+
+
+"SYNTASTIC SETTINGS
+"checks syntax opens recommendations in new split
+"options for output window?
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+"run the check (have to save the buffer first)
+map <F6> :SyntasticCheck<Return>
+"clear the error list
+map <F7> :SyntasticReset<Return>
+
+"Syntastic default mode, can be set for each filetype in the arrays
+let g:syntastic_mode_map = {
+    \ "mode": "passive",
+    \ "active_filetypes": [],
+    \ "passive_filetypes": [] }
+
+"checks syntax on file open
+let g:syntastic_check_on_open = 0
+"checks syntax on :wq :x or :ZZ if 1
+let g:syntastic_check_on_wq = 0
+
+"Always put detected errors in the list (can conflict w other plugins)
+let g:syntastic_always_populate_loc_list = 1
+
+"0 - error window not opened/closed automatically.
+"1 - error window automatically opened when errors detected, closed when none are detected. (default)
+"2 - error window automatically closed when no errors are detected, but not opened automatically.
+"3 - error window automatically opened when errors are detected, but not closed automatically.
+let g:syntastic_auto_loc_list = 1
+"how tall the syntastic list is
+let g:syntastic_loc_list_height = 7
+
+"How syntastic split title bar looks
+let g:syntastic_stl_format = "[Syntax! line: %F | %E{Total Errors: %e} | %W{Total Warnings: %w}]"
+
+"go between next and previous matches
+nnoremap <leader><C-j> :lnext<CR>
+nnoremap <leader><C-k> :lprevious<CR>
+
+
+
+"R PLUGIN SETTINGS
+"disable autocomplpop for r files
+"autocmd FileType r AutoComplPopDisable 
+"autocmd FileType rmd AutoComplPopDisable 
+"want to use nvim-r+ncm2+ncm-R, install with script in github
+"enable ncm2 for buffers
+"autocmd FileType r BufEnter * call ncm2#enable_for_buffer()
+"autocmd FileType rmd BufEnter * call ncm2#enable_for_buffer()
+"autocmd BufEnter * call ncm2#enable_for_buffer()
+"set completeopt=noinsert,menuone,noselect
+"
+"VIM-MATHEMATICA PLUGIN SETTINGS
+"for editing mathematica plain-text scripts
+let g:mma_candy = 1 
+set encoding=utf-8
+set fileencoding=utf-8
 
 
 
@@ -372,82 +481,4 @@ autocmd FileType bib nmap <leader>a i@article{<Enter>author<Space>=<Space>{<++>}
 autocmd FileType bib nmap <leader>b i@book{<Enter>author<Space>=<Space>{<++>},<Enter>year<Space>=<Space>{<++>},<Enter>title<Space>=<Space>{<++>},<Enter>publisher<Space>=<Space>{<++>},<Enter>}<Enter><++><Esc>6kA,<Esc>i
 autocmd FileType bib nmap <leader>c i@incollection{<Enter>author<Space>=<Space>{<++>},<Enter>title<Space>=<Space>{<++>},<Enter>booktitle<Space>=<Space>{<++>},<Enter>editor<Space>=<Space>{<++>},<Enter>year<Space>=<Space>{<++>},<Enter>publisher<Space>=<Space>{<++>},<Enter>}<Enter><++><Esc>8kA,<Esc>i
 
-
-
-"VIM-MATHEMATICA PLUGIN SETTINGS
-"for editing mathematica plain-text scripts
-let g:mma_candy = 1 
-set encoding=utf-8
-set fileencoding=utf-8
-
-
-
-"AUTOCOMPLPOP PLUGIN SETTINGS
-"extension for auto-completion
-"
-"autocomplete from the spell check dictionary
-"set complete+=kspell  "this is not needed/doesn't work?
-"
-"Autocomplete will show completions when there is only one recommendation
-set completeopt=menuone
-"suppresses output on bottom of screen for selections
-set shortmess+=c
-"Ignore case for autocompletion recommendations (1 i.e. true is default)
-let g:acp_ignorecaseOption = 1
-"
-"remap carriage return/enter so that it doesn't autocomplete,
-"remap Ctrl+l to select first option in autocomplete
-inoremap <expr> <CR> pumvisible() ? '<C-e><CR>' : '<CR>'
-inoremap <expr> <C-l> pumvisible() ? '<CR>' : '<CR>'
-"instead you replace what you type w/ Ctrl+n or Ctrl+p
-"or with Ctrl+j or Ctrl+k with these remaps
-inoremap <expr> <C-j> pumvisible() ? "\<C-n>" : "\<Down>"
-inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<Up>"
-"Ctrl+e will make autocomplete menu go away
-"
-"How much space the autocomplete menu takes up
-set pumheight=8 "how many recommendations to give default is all space (100?)
-
-
-
-"SYNTASTIC SETTINGS
-"checks syntax opens recommendations in new split
-"options for output window?
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-"run the check (have to save the buffer first)
-map <F6> :SyntasticCheck<Return>
-"clear the error list
-map <F7> :SyntasticReset<Return>
-
-"Syntastic default mode, can be set for each filetype in the arrays
-let g:syntastic_mode_map = {
-    \ "mode": "passive",
-    \ "active_filetypes": [],
-    \ "passive_filetypes": [] }
-
-"checks syntax on file open
-let g:syntastic_check_on_open = 0
-"checks syntax on :wq :x or :ZZ if 1
-let g:syntastic_check_on_wq = 0
-
-"Always put detected errors in the list (can conflict w other plugins)
-let g:syntastic_always_populate_loc_list = 1
-
-"0 - error window not opened/closed automatically.
-"1 - error window automatically opened when errors detected, closed when none are detected. (default)
-"2 - error window automatically closed when no errors are detected, but not opened automatically.
-"3 - error window automatically opened when errors are detected, but not closed automatically.
-let g:syntastic_auto_loc_list = 1
-"how tall the syntastic list is
-let g:syntastic_loc_list_height = 7
-
-"How syntastic split title bar looks
-let g:syntastic_stl_format = "[Syntax! line: %F | %E{Total Errors: %e} | %W{Total Warnings: %w}]"
-
-"go between next and previous matches
-nnoremap <leader><C-j> :lnext<CR>
-nnoremap <leader><C-k> :lprevious<CR>
 
