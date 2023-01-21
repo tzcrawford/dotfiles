@@ -3,7 +3,7 @@
 BOOK=$HOME/.abook/addressbook 
 
 # Get the name of the phone device
-DEVICENAME="$(kdeconnect-cli --list-devices | head -n 1 | awk '{ print $2 }' | sed 's/://g')" 
+DEVICENAME="$(kdeconnect-cli --list-available | sed 1q | awk '{ print $2 }' | sed 's/://g')" 
 
 # Pick the name of the person you are sending a message to
 NAMELINE="$(grep -i "^name=" $BOOK | ~/scripts/dmenu.sh)"
@@ -38,5 +38,3 @@ fi
 
 # Okay send the message
 kdeconnect-cli -n "$DEVICENAME" --destination "$PHONENUM" --send-sms "$MSG"
-
-exit 0
