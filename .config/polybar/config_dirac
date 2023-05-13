@@ -74,12 +74,12 @@ module-margin-right = 1
 ;landau
 font-0 = EnvyCodeR:style=bold:pixelsize=15:antialias=true;1
 
-font-1 = FontAwesome5Free:style=Solid:antialias=false:pixelsize = 5;2
-font-2 = FontAwesome5Brands:style=Solid:antialias=false:pixelsize= 5;2
+font-1 = FontAwesome6Free:style=Solid:antialias=false:pixelsize = 4;2
+font-2 = FontAwesome6Brands:style=Solid:antialias=false:pixelsize= 4;2
 
 modules-left = xkeyboard i3
 modules-center = 
-modules-right = filesystem mpd pulseaudio wlan eth cpu temperature temperature2 temperature3 temperature4 temperature5 memory vmemory battery date 
+modules-right = filesystem mpd pulseaudio wlan eth cpu temperature temperature2 memory vmemory battery date 
 
 tray-position = right
 tray-padding = 1
@@ -236,7 +236,7 @@ label = %percentage_used%%
 ;ALL ALL = (ALL) NOPASSWD: /bin/cat /sys/kernel/debug/dri/0/amdgpu_vram_mm
 type = custom/script
 interval = 2
-exec = /home/paul/scripts/in_terminal/gpustats.sh
+exec = if [ "$USER" = "paul" ]; then $HOME/scripts/in_terminal/gpustats.sh; fi
 ;exec-if = 
 tail=true
 format-prefix = "   "
@@ -381,21 +381,20 @@ animation-charging-framerate = 750
 
 
 [module/temperature]
+;cpu temp
+
+type = internal/temperature
+;thermal-zone = 0
+warn-temperature = 71
+
 ;https://github.com/jaagr/polybar/wiki/Module:-temperature
 ;https://wiki.archlinux.org/index.php/Lm_sensors
 ;next line gives the command which will list non-default hwmon-paths
 ;for i in /sys/class/hwmon/hwmon*/temp*_input; do echo "$(<$(dirname $i)/name): $(cat ${i%_*}_label 2>/dev/null || echo $(basename ${i%_*})) $(readlink -f $i)"; done
-type = internal/temperature
-
-;loaf
 ;hwmon-path=/sys/devices/pci0000:00/0000:00:18.3/hwmon/hwmon0/temp1_input
-;hwmon-path=/sys/devices/pci0000:00/0000:00:18.3/hwmon/hwmon1/temp1_input
-;thermal-zone = 0 ;Not present in loaf
-warn-temperature = 71
-;dirac
-hwmon-path=/sys/devices/pci0000:00/0000:00:18.3/hwmon/hwmon0/temp1_input
-;dirac gpu
-;hwmon-path=/sys/devices/pci0000:00/0000:00:01.1/0000:01:00.0/hwmon/hwmon1/temp1_input
+;using environment variable cputemppath (in .bash_profile) defaulting to file that follows
+hwmon-path=${env:cputemppath:/sys/devices/pci0000:00/0000:00:18.3/hwmon/hwmon1/temp1_input}
+
 ;format = <ramp> <label>
 format = <label>
 format-underline = #85ff0000
@@ -413,11 +412,15 @@ ramp-foreground = ${colors.foreground-alt}
 
 
 [module/temperature2]
+;gpu temp
 type = internal/temperature
 warn-temperature = 71
-;dirac gpu
-hwmon-path=/sys/devices/pci0000:00/0000:00:01.1/0000:01:00.0/hwmon/hwmon2/temp1_input
-;hwmon-path=/sys/devices/pci0000:00/0000:00:01.1/0000:01:00.0/hwmon/hwmon1/temp1_input
+
+;hwmon-path=$(find /sys/devices/pci0000:00/0000:00:*/0000:0*:00.0/hwmon/hwmon*/temp1_input) ; doesn't work
+;using environment variable gputemppath (in .bash_profile) defaulting to file that follows
+;hwmon-path=${env:gputemppath:/sys/devices/pci0000:00/0000:00:03.1/0000:06:00.0/hwmon/hwmon2/temp1_input}
+hwmon-path=${env:gputemppath:/sys/devices/pci0000:00/0000:00:03.1/0000:06:00.0/0000:07:00.0/0000:08:00.0/hwmon/hwmon2/temp1_input}
+
 ;format = <ramp> <label>
 format = <label>
 ;format-underline = #85ff0055
@@ -433,78 +436,6 @@ ramp-0 = 
 ramp-1 = 
 ramp-2 = 
 ramp-foreground = ${colors.foreground-alt}
-
-[module/temperature3]
-type = internal/temperature
-warn-temperature = 71
-;dirac gpu
-;hwmon-path=/sys/devices/pci0000:00/0000:00:01.1/0000:01:00.0/hwmon/hwmon2/temp1_input
-hwmon-path=/sys/devices/pci0000:00/0000:00:01.1/0000:01:00.0/hwmon/hwmon1/temp1_input
-;format = <ramp> <label>
-format = <label>
-;format-underline = #85ff0055
-format-underline = #859f1d35
-format-warn = <label-warn>
-format-warn-underline = ${self.format-underline}
-
-label =   %temperature%
-label-warn =   %temperature%
-label-warn-foreground = ${colors.secondary}
-
-ramp-0 = 
-ramp-1 = 
-ramp-2 = 
-ramp-foreground = ${colors.foreground-alt}
-
-[module/temperature4]
-type = internal/temperature
-warn-temperature = 71
-;dirac gpu
-;hwmon-path=/sys/devices/pci0000:00/0000:00:18.3/0000:01:00.0/hwmon/hwmon2/temp1_input
-;hwmon-path=/sys/devices/pci0000:00/0000:00:01.1/0000:01:00.0/hwmon/hwmon1/temp1_input
-hwmon-path=/sys/devices/pci0000:00/0000:00:03.1/0000:06:00.0/hwmon/hwmon2/temp1_input
-;format = <ramp> <label>
-format = <label>
-;format-underline = #85ff0055
-format-underline = #859f1d35
-format-warn = <label-warn>
-format-warn-underline = ${self.format-underline}
-
-label =   %temperature%
-label-warn =   %temperature%
-label-warn-foreground = ${colors.secondary}
-
-ramp-0 = 
-ramp-1 = 
-ramp-2 = 
-ramp-foreground = ${colors.foreground-alt}
-
-[module/temperature5]
-type = internal/temperature
-warn-temperature = 71
-;dirac gpu
-;hwmon-path=/sys/devices/pci0000:00/0000:00:18.3/0000:01:00.0/hwmon/hwmon2/temp1_input
-;hwmon-path=/sys/devices/pci0000:00/0000:00:01.1/0000:01:00.0/hwmon/hwmon1/temp1_input
-;hwmon-path=/sys/devices/pci0000:00/0000:00:03.1/0000:06:00.0/hwmon/hwmon2/temp1_input
-hwmon-path=/sys/devices/pci0000:00/0000:00:03.1/0000:06:00.0/hwmon/hwmon1/temp1_input
-;format = <ramp> <label>
-format = <label>
-;format-underline = #85ff0055
-format-underline = #859f1d35
-format-warn = <label-warn>
-format-warn-underline = ${self.format-underline}
-
-label =   %temperature%
-label-warn =   %temperature%
-label-warn-foreground = ${colors.secondary}
-
-ramp-0 = 
-ramp-1 = 
-ramp-2 = 
-ramp-foreground = ${colors.foreground-alt}
-
-
-
 
 
 [module/pulseaudio]
@@ -512,7 +443,8 @@ type = internal/pulseaudio
 
 ; Sink to be used, if it exists (find using `pacmd list-sinks`, name field)
 ; If not, uses default sink
-sink = alsa_output.pci-0000_12_00.3.analog-stereo
+;sink = alsa_output.pci-0000_12_00.3.analog-stereo
+sink = alsa_card.pci-0000_08_00.3.analog-stereo
 
 ; Use PA_VOLUME_UI_MAX (~153%) if true, or PA_VOLUME_NORM (100%) if false
 ; Default: true
