@@ -296,7 +296,8 @@ set omnifunc=syntaxcomplete#Complete "Use all syntax completion options all the 
 "set complete+=kspell  "this is not needed since we added the spell file to the dictionary
 
 "Autocomplete will show completions when there is only one recommendation
-set completeopt=menuone
+"set completeopt=menuone
+set completeopt=menuone,preview "This allows popups for OmniSharp documentation etc
 "suppresses output on bottom of screen for selections
 set shortmess+=c
 
@@ -372,6 +373,105 @@ let g:syntastic_stl_format = "[Syntax! line: %F | %E{Total Errors: %e} | %W{Tota
 "go between next and previous matches
 nnoremap <leader><C-j> :lnext<CR>
 nnoremap <leader><C-k> :lprevious<CR>
+
+"ALE Linting
+let g:ale_linters = {'cs': ['OmniSharp']}
+"disable text at the end of lines
+let g:ale_virtualtext_cursor = 'disabled'
+"let g:ale_sign_error = '>>'
+let g:ale_sign_error = '>'
+"let g:ale_sign_warning = '--'
+let g:ale_sign_warning = '-'
+"Remove highlighting in sign gutter
+"highlight clear ALEErrorSign
+"highlight clear ALEWarningSign
+"Remove highlighting for SpellBad, SpellCap, error, todo
+let g:ale_set_highlights = 0
+"Hightlight errors with one color
+"highlight ALEWarning ctermbg=DarkMagenta
+
+"OMNISHARP PLUGIN SETTINGS
+"Bug installing?
+"try :OmniSharpInstall v1.38.1
+"https://github.com/OmniSharp/omnisharp-vim/issues/766
+
+"This is required
+filetype indent plugin on
+"syntax enable "already done above...
+"let g:OmniSharp_start_server = 0 "disable plugin
+let g:OmniSharp_server_use_mono = 1 "what type of server to use mono or .net
+
+"let g:OmniSharp_popup = 0 " Disable popups
+"autocmd FileType cs AutoComplPopDisable "disable autocomplpop for csharp
+let g:OmniSharp_highlighting = 3
+let g:OmniSharp_popup_position = 'atcursor'
+let g:OmniSharp_popup_options = {
+\ 'highlight': 'Normal',
+\ 'padding': [1],
+\ 'border': [1],
+\ 'borderchars': ['─', '│', '─', '│', '╭', '╮', '╯', '╰'],
+\ 'borderhighlight': ['Special']
+\}
+let g:OmniSharp_popup_mappings = {
+\ 'sigNext': '<C-n>',
+\ 'sigPrev': '<C-p>',
+\ 'pageDown': ['<C-f>', '<PageDown>'],
+\ 'pageUp': ['<C-b>', '<PageUp>'],
+\ 'lineDown': ['<C-j>'],
+\ 'lineUp': ['<C-k>']
+\}
+"Vim in the terminal does not have a default <Esc> close mapping, because <Esc> mappings interfere with escape codes in terminal Vim, meaning that key-codes such as arrow keys and <PageUp>/<PageDown> do not work as expected. Therefore, terminal Vim only has the gq mapping. Gvim and neovim handle escape codes differently, so are not affected, and have both gq and <Esc> as default close mappings.
+let g:OmniSharp_popup_mappings.close = '<Esc>'
+
+
+
+"For linting with syntastic if no ALE
+"let g:syntastic_cs_checkers = ['code_checker']
+
+augroup omnisharp_commands
+  autocmd!
+
+  " Show type information automatically when the cursor stops moving.
+  " Note that the type is echoed to the Vim command line, and will overwrite
+  " any other messages in this space including e.g. ALE linting messages.
+  autocmd CursorHold *.cs OmniSharpTypeLookup
+
+  " The following commands are contextual, based on the cursor position.
+  "autocmd FileType cs nmap <silent> <buffer> gd <Plug>(omnisharp_go_to_definition)
+  autocmd FileType cs nmap <silent> <buffer> <Leader>osfu <Plug>(omnisharp_find_usages)
+  autocmd FileType cs nmap <silent> <buffer> <Leader>osfi <Plug>(omnisharp_find_implementations)
+  autocmd FileType cs nmap <silent> <buffer> <Leader>ospd <Plug>(omnisharp_preview_definition)
+  autocmd FileType cs nmap <silent> <buffer> gd <Plug>(omnisharp_preview_definition) " custom
+  autocmd FileType cs nmap <silent> <buffer> <Leader>ospi <Plug>(omnisharp_preview_implementations)
+  autocmd FileType cs nmap <silent> <buffer> <Leader>ost <Plug>(omnisharp_type_lookup)
+  autocmd FileType cs nmap <silent> <buffer> <Leader>osd <Plug>(omnisharp_documentation)
+  autocmd FileType cs nmap <silent> <buffer> gf <Plug>(omnisharp_documentation)
+  autocmd FileType cs nmap <silent> <buffer> <Leader>osfs <Plug>(omnisharp_find_symbol)
+  autocmd FileType cs nmap <silent> <buffer> <Leader>osfx <Plug>(omnisharp_fix_usings)
+  autocmd FileType cs nmap <silent> <buffer> <C-\> <Plug>(omnisharp_signature_help)
+  autocmd FileType cs imap <silent> <buffer> <C-\> <Plug>(omnisharp_signature_help)
+
+  " Navigate up and down by method/property/field
+  autocmd FileType cs nmap <silent> <buffer> [[ <Plug>(omnisharp_navigate_up)
+  autocmd FileType cs nmap <silent> <buffer> ]] <Plug>(omnisharp_navigate_down)
+  " Find all code errors/warnings for the current solution and populate the quickfix window
+  autocmd FileType cs nmap <silent> <buffer> <Leader>osgcc <Plug>(omnisharp_global_code_check)
+  " Contextual code actions (uses fzf, vim-clap, CtrlP or unite.vim selector when available)
+  autocmd FileType cs nmap <silent> <buffer> <Leader>osca <Plug>(omnisharp_code_actions)
+  autocmd FileType cs xmap <silent> <buffer> <Leader>osca <Plug>(omnisharp_code_actions)
+  " Repeat the last code action performed (does not use a selector)
+  autocmd FileType cs nmap <silent> <buffer> <Leader>os. <Plug>(omnisharp_code_action_repeat)
+  autocmd FileType cs xmap <silent> <buffer> <Leader>os. <Plug>(omnisharp_code_action_repeat)
+
+  autocmd FileType cs nmap <silent> <buffer> <Leader>os= <Plug>(omnisharp_code_format)
+
+  autocmd FileType cs nmap <silent> <buffer> <Leader>osnm <Plug>(omnisharp_rename)
+
+  autocmd FileType cs nmap <silent> <buffer> <Leader>osre <Plug>(omnisharp_restart_server)
+  autocmd FileType cs nmap <silent> <buffer> <Leader>osst <Plug>(omnisharp_start_server)
+  autocmd FileType cs nmap <silent> <buffer> <Leader>ossp <Plug>(omnisharp_stop_server)
+augroup END
+
 
 
 
