@@ -1,0 +1,67 @@
+!! Extensions
+URxvt.perl-ext-common: default,matcher,font-size,url-select,keyboard-select
+URxvt.perl-lib: /usr/lib/urxvt/perl
+URxvt.colorUL:          #4682B4
+
+!! Copy/Paste
+URxvt.keysym.Shift-Control-V: eval:paste_clipboard
+URxvt.keysym.Shift-Control-C: eval:selection_to_clipboard
+!! disable iso14755 mode which would allow for special unicode character entry, but the default binding is ctrl-shift
+URxvt.iso14755: False
+URxvt.iso14755_52: False
+
+!! keyboard select, mouseless text sellection
+!!URxvt.keysym.M-Escape: perl:keyboard-select:activate
+URxvt.keysym.Control-Escape: perl:keyboard-select:activate
+!! keyboard search
+URxvt.keysym.Control-s: perl:keyboard-select:search
+!!copy to clipboard too
+URxvt.keyboard-select.clipboard:
+
+!! Font
+!!URxvt.font: -misc-fixed-medium-r-normal--15-140-75-75-c-90-iso8859-1
+!!URxvt.font: xft:monospace:size=8
+!!Requires EnvyCodeR, Install AUR:ttf-envy-code-r
+!!URxvt.font: xft:EnvyCodeR:size=13, xft:Symbola:size=13
+URxvt.font: xft:EnvyCodeR:size=16, xft:Symbola:size=16
+URxvt.letterSpace: 0
+!URxvt.letterSpace: -2 !In version 9.31-1, the spacing increased??
+
+!! Resize-font, need to install AUR: urxvt-font-size-git
+URxvt.keysym.C-S-=: font-size:increase
+URxvt.keysym.C-Down: font-size:decrease
+URxvt.keysym.C-equal: font-size:reset
+URxvt.keysym.C-slash: font-size:show
+
+
+! Transparency
+!True transparency
+!pywal does not support true transparency https://github.com/dylanaraps/pywal/issues/31
+!can use the older version, wal, but it is much slower (use the wal -a [number] option to maintain transparency, where number is the same as called in the background line
+!URxvt*depth: 32
+!URxvt*background: [50]#000000
+
+!False transparency
+URxvt*inheritPixmap:true
+URxvt*transparent:true
+!! URxvt*shading: 0 to 99 darkens, 101 to 200 lightens
+!URxvt*shading: 35
+URxvt*shading: 20
+
+!!!Tint
+!URxvt.tintColor: black
+
+!The scrollbar on the right side of the terminal. Can scroll with mouse wheel.
+URxvt.scrollBar:false
+
+!! URxvt clickable links
+!!URxvt.perl-ext-common: default,matcher
+URxvt.url-launcher: /usr/bin/xdg-open
+URxvt.matcher.button: 1
+
+Xcursor.size: 16
+
+
+
+!!The 2023-01-02 update may require adding some lines
+URxvt.geometry: 400x400
