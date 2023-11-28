@@ -57,3 +57,10 @@ export LESS_TERMCAP_us=$'\E[01;32m'
 
 
 export MANGOHUD=1
+
+
+# Force alacritty to recover color scheme
+if command -v wal > /dev/null 2>&1 && [ "$TERM" = "alacritty" ]; then
+    # Run 'wal' command with options to recover color scheme, ignore output, and ignore updating other apps
+    wal -Rqe
+fi

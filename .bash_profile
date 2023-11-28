@@ -7,7 +7,7 @@
 export EDITOR="vim"
 #export BROWSER="firefox"
 export BROWSER="qutebrowser"
-export TERM="alacritty"
+#export TERM="alacritty" # We don't want to do this because linux should determine this automatically.
 
 
 # Fixing config files to comply with xdg

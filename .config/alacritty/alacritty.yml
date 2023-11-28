@@ -133,7 +133,8 @@ font:
     #   - (Linux/BSD) monospace
     #   - (Windows) Consolas
     #family: monospace
-    family: EnvyCodeR
+    family: terminal-font
+    #family: EnvyCodeR
 
     # The `style` can be specified to pick a specific face.
     style: Regular
@@ -198,6 +199,7 @@ font:
   # characters (Unicode points 2500 - 259f).
   #
   #builtin_box_drawing: true
+  #builtin_box_drawing: false
 
 # If `true`, bold text is drawn using the bright color variants.
 #draw_bold_text_with_bright_colors: false
