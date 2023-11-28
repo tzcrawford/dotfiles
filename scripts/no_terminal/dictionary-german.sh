@@ -7,5 +7,6 @@
 temp=$(cat /usr/share/dict/german | dmenu -i -l 15 -fn EnvyCodeR-20 -nb '#2c2c2e' -nf '#c41f52' -sb '#040404' -sf '#f22162')
 if ! [ "$temp" = "" ]; then 
     #dict -d fd-deu-eng "$temp" 
-    urxvt -e sh -c "dict -d fd-deu-eng \"$temp\" | less ; exit" 
+    #urxvt -e sh -c "dict -d fd-deu-eng \"$temp\" | less ; exit" 
+    alacritty -e sh -c "dict -d fd-deu-eng \"$temp\" | less ; exit" 
 fi
