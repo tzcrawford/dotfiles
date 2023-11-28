@@ -2,7 +2,8 @@
 #will spawn a terminal emulator running a script you select via dmenu
 #from scripts in ~/scripts/in_terminal/
 
-temp=$(ls ~/scripts/in_terminal | dmenu -i -l 15 -fn EnvyCodeR-20 -nb '#2c2c2e' -nf '#c279c4' -sb '#040404' -sf '#f700ff')
+
+temp=$(ls ~/scripts/in_terminal | ~/scripts/dmenu.sh -v )
 
 #if ! [ "$temp" = "" ]; then urxvt -hold -e ~/scripts/in_terminal/$temp; fi
 if ! [ "$temp" = "" ]; then 

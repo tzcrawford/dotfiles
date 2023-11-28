@@ -13,8 +13,7 @@ if [[ $(echo "$GRAPHICSMODULE" | wc -l) == 0 ]]; then
 fi
 #If multiple cards, select one
 if [[ $(echo "$GRAPHICSMODULE" | wc -l) != 1 ]]; then
-        GRAPHICSMODULE=$(echo "$GRAPHICSMODULE" | dmenu -i -l 15 -fn Monospace-18 -nb '#2c2c2e' -nf '#ff944d' -sb '#040404' -sf '#ff6600')
-        #GRAPHICSMODULE=$(echo "$GRAPHICSMODULE" | rofi -dmenu)
+        GRAPHICSMODULE=$(echo "$GRAPHICSMODULE" | ~/scripts/dmenu.sh )
 fi
 
 #Checking for brightness option for graphics module
@@ -52,8 +51,7 @@ MAXBRIGHTNESS=$(cat $DIRECTORY/max_brightness)
 declare -i MAXBRIGHNESS
 
 #Select brightness as percent
-SELECTION=$(echo -e "100%\n90%\n80%\n70%\n60%\n50%\n40%\n30%\n20%\n10%" | dmenu -i -l 15 -fn Monospace-18 -nb '#2c2c2e' -nf '#ff944d' -sb '#040404' -sf '#ff6600')
-#SELECTION=$(echo -e "100%\n90%\n80%\n70%\n60%\n50%\n40%\n30%\n20%\n10%" | rofi -dmenu)
+SELECTION=$(echo -e "100%\n90%\n80%\n70%\n60%\n50%\n40%\n30%\n20%\n10%" | ~/scripts/dmenu.sh )
 #Shave off percent symbol
 SELECTION=$(echo $SELECTION | sed s'/.$//')
 #Scale to max brightness
@@ -62,3 +60,4 @@ SELECTION=$SELECTION*$MAXBRIGHTNESS/100
 
 #Actually make change by writing file
 echo $SELECTION > $DIRECTORY/brightness
+
