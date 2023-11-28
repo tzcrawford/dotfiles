@@ -5,19 +5,26 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-#Current prompt setting
+# Current prompt setting
 #PS1='[\u@\h \W]\$ '
-PS1='\u@\h \W \$ '
+#PS1='\u@\h \W \$ '
+PS1="\[$(tput setaf 4)\]\u\[$(tput setaf 5)\]@\[$(tput setaf 3)\]\h\[$(tput setaf 9)\] \W \[$(tput setaf 2)\]🌴\[$(tput sgr0)\] "
 
-#Looks for loads aliases from ~/.bash_aliases
+# Looks for loads aliases from ~/.bash_aliases
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
-#vi mode
+# Add to path
+export PATH=$HOME/.local/share/cargo/bin/:$PATH # rust binaries
+#export PATH=/opt/anaconda/bin/:$PATH
+export PATH=$HOME/scripts/in_path:$PATH
+export PATH=$HOME/.local/share/gem/ruby/3.0.0/bin:$PATH
+
+# vi mode
 set -o vi
 
-#command to extract arbitrary compressed archive
+# Command to extract arbitrary compressed archive
 extract () {
    if [ -f $1 ] ; then
        case $1 in
@@ -39,7 +46,7 @@ extract () {
    fi
  }
 
-#colored manpages
+# Colored manpages
 export LESS_TERMCAP_mb=$'\E[01;31m'
 export LESS_TERMCAP_md=$'\E[01;31m'
 export LESS_TERMCAP_me=$'\E[0m'
@@ -47,3 +54,6 @@ export LESS_TERMCAP_se=$'\E[0m'
 export LESS_TERMCAP_so=$'\E[01;44;33m'
 export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[01;32m'
+
+
+export MANGOHUD=1
