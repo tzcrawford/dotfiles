@@ -28,7 +28,8 @@ set $shutdown sudo shutdown -h now
 set $reboot sudo reboot 
 set $netrefresh --no-startup-id sudo systemctl restart NetworkManager.service
 # Application Aliases
-set $term urxvt 
+#set $term urxvt 
+set $term alacritty
 set $music ~/scripts/no_terminal/musicplayer.sh
 set $explorer thunar
 set $browser qutebrowser --backend webengine
