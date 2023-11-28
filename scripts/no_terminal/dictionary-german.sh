@@ -8,5 +8,8 @@ temp=$(cat /usr/share/dict/german | dmenu -i -l 15 -fn EnvyCodeR-20 -nb '#2c2c2e
 if ! [ "$temp" = "" ]; then 
     #dict -d fd-deu-eng "$temp" 
     #urxvt -e sh -c "dict -d fd-deu-eng \"$temp\" | less ; exit" 
+    if command -v wal > /dev/null 2>&1 ; then
+        sleep 0.1 && wal -Rqe & disown # Reload color scheme in the newly spawned window. This is buggy, needs adjustment.
+    fi
     alacritty -e sh -c "dict -d fd-deu-eng \"$temp\" | less ; exit" 
 fi

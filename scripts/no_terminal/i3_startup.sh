@@ -11,3 +11,4 @@ i3-msg 'workspace 1'
 
 #i3-msg 'exec ~/.config/polybar/polybarstart.sh'
 i3-msg 'restart' # IDK, polybar just isn't starting on intial startup...
+

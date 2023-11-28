@@ -7,5 +7,8 @@
 temp=$(cat /usr/share/dict/american-english | dmenu -i -l 15 -fn EnvyCodeR-20 -nb '#2c2c2e' -nf '#c41f52' -sb '#040404' -sf '#f22162')
 if ! [ "$temp" = "" ]; then 
     #urxvt -e sh -c "dict -d english \"$temp\" | less ; exit" 
+    if command -v wal > /dev/null 2>&1 ; then
+        sleep 0.1 && wal -Rqe & disown # Reload color scheme in the newly spawned window. This is buggy, needs adjustment.
+    fi
     alacritty -e sh -c "dict -d english \"$temp\" | less ; exit" 
 fi
