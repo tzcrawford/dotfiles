@@ -826,9 +826,12 @@ key_bindings:
   - { key: Left,                        mode: Vi|~Search, action: Left                    }
   - { key: Right,                       mode: Vi|~Search, action: Right                   }
   - { key: Key0,                        mode: Vi|~Search, action: First                   }
+  - { key: 0,                           mode: Vi|~Search, action: First                   }
   - { key: Key4,   mods: Shift,         mode: Vi|~Search, action: Last                    }
   - { key: Key4,                        mode: Vi|~Search, action: Last                    }
+  - { key: 4,      mods: Shift,         mode: Vi|~Search, action: Last                    }
   - { key: Key6,   mods: Shift,         mode: Vi|~Search, action: FirstOccupied           }
+  - { key: 6,      mods: Shift,         mode: Vi|~Search, action: FirstOccupied           }
   - { key: H,      mods: Shift,         mode: Vi|~Search, action: High                    }
   - { key: M,      mods: Shift,         mode: Vi|~Search, action: Middle                  }
   - { key: L,      mods: Shift,         mode: Vi|~Search, action: Low                     }
@@ -839,6 +842,7 @@ key_bindings:
   - { key: W,      mods: Shift,         mode: Vi|~Search, action: WordRight               }
   - { key: E,      mods: Shift,         mode: Vi|~Search, action: WordRightEnd            }
   - { key: Key5,   mods: Shift,         mode: Vi|~Search, action: Bracket                 }
+  - { key: 5,      mods: Shift,         mode: Vi|~Search, action: Bracket                 }
   - { key: Slash,                       mode: Vi|~Search, action: SearchForward           }
   - { key: Slash,  mods: Shift,         mode: Vi|~Search, action: SearchBackward          }
   - { key: N,                           mode: Vi|~Search, action: SearchNext              }
@@ -865,8 +869,10 @@ key_bindings:
   - { key: C,              mods: Control|Shift, mode: Vi|~Search, action: ClearSelection   }
   - { key: Insert,         mods: Shift,                           action: PasteSelection   }
   - { key: Key0,           mods: Control,                         action: ResetFontSize    }
+  - { key: 0,              mods: Control,                         action: ResetFontSize    }
   - { key: Equals,         mods: Control,                         action: IncreaseFontSize }
   - { key: Plus,           mods: Control,                         action: IncreaseFontSize }
+  - { key: Plus,           mods: Control|Shift,                   action: IncreaseFontSize }
   - { key: NumpadAdd,      mods: Control,                         action: IncreaseFontSize }
   - { key: Minus,          mods: Control,                         action: DecreaseFontSize }
   - { key: NumpadSubtract, mods: Control,                         action: DecreaseFontSize }
