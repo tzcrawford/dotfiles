@@ -1,32 +1,39 @@
-# dirac i3 config file (v4)
+# i3 config file (v4)
 #
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
-#
-#
-#Note any i3 settings can be changed temporarily by executing a terminal process "i3-msg _____"
+# Note any i3 settings can be changed temporarily by executing a terminal process `i3-msg _____`
 
+##### Multimonitor control with arandr/xrandr #####
+exec ~/scripts/no_terminal/xrandr_dirac.sh
+exec --no-startup-id sleep 5
 
+##### Load in .Xresources config #####
+exec xrdb ~/.Xresources
+exec --no-startup-id sleep 3
 
-#Runs Xmodmap to change keyboard settings
-exec if pacman -Q | grep -q "xmodmap"; then exec ~/scripts/no_terminal/keyboard.sh; fi;⎈
+##### Change keyboard settings (mod button) #####
+#exec if pacman -Q | grep -q "xmodmap"; then exec ~/scripts/no_terminal/keyboard.sh; fi;⎈
+exec pacman -Q | grep -q "xmodmap" && exec ~/scripts/no_terminal/keyboard.sh
 
 ##### Definitions #####
-#Controls
+# Control Aliases
 set $mod mod4
 
-#Display
+# Display Aliases
 set $monitor1 DisplayPort-0
 set $monitor2 HDMI-A-0 
-#SYSTEMD
+set $monitor3 DisplayPort-2
+# SystemD Aliases
 set $shutdown sudo shutdown -h now 
 set $reboot sudo reboot 
 set $netrefresh --no-startup-id sudo systemctl restart NetworkManager.service
-#Applications
+# Application Aliases
 set $term urxvt 
-set $music clementine
+set $music ~/scripts/no_terminal/musicplayer.sh
 set $explorer thunar
 set $browser qutebrowser --backend webengine
-#Workspace Names
+
+# Workspace Names
 set $ws0 "0"
 set $ws1 "1"
 set $ws2 "2"
@@ -58,7 +65,8 @@ set $ws27 "27"
 set $ws28 "28"
 set $ws29 "29"
 
-#Default Colors
+##### Color Theme #####
+
 #dark gray
 set $bg            #2c2c2e
 #bright silver
@@ -78,8 +86,6 @@ set $tx            #040404
 #medium gray
 set $ia            #8f8f8f
 
-##### i3 Colors #####
-#Window Colors
 #                           border      background   text   indicator(i.e. where the next window will be tiled
 client.focused              $lo         $lo          $tx    $hi
 client.unfocused            $bg         $bg          $ia
@@ -103,7 +109,7 @@ font pango:DejaVu Sans Mono 8
 
 
 
-##### Display #####
+##### Status Bar #####
 # Start i3bar to display a workspace bar (plus the system information i3status finds out, if available)
 #bar {
 #        status_command i3status
@@ -127,24 +133,20 @@ font pango:DejaVu Sans Mono 8
     #}
 #}
 
-#Polybar
+# Polybar
+exec ~/.config/polybar/polybarstart.sh
 exec_always ~/.config/polybar/polybarstart.sh
-#Compton for Transparency
+# Compton for Transparency
+exec picom
 exec_always picom
 
-#Pulse Audio Applet
+# Pulse Audio Applet
 #exec --no-startup-id ~/.config/i3/i3_pa-applet
 
-#Network Manager applet
+# Network Manager applet
 #exec_always --no-startup-id nm-applet
 
-#arandr/xrandr multimonitor control
-#exec ~/scripts/no_terminal/xrandr_dirac_3monitor_60.sh
-#exec ~/scripts/no_terminal/xrandr_dirac_2monitor.sh
-#exec ~/scripts/no_terminal/xrandr_dirac_displayport.sh
-
-#Wallpaper slideshow
-exec xrdb ~/.Xresources
+# Wallpaper
 exec ~/scripts/themes/i3_theme_slideshow.sh
 bindsym $mod+F5 exec ~/scripts/themes/themepick.sh
 
@@ -153,94 +155,94 @@ bindsym $mod+F5 exec ~/scripts/themes/themepick.sh
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
-# start a terminal
+# Start a terminal
 bindsym $mod+Return exec $term 
 
-# kill focused window
+# Kill focused window
 #bindsym $mod+Shift+q kill
 bindsym $mod+F4 kill
 
-#Program Launcher
-#bindsym $mod+F1 exec dmenu_run
+# Program Launcher
+
+# bindsym $mod+F1 exec dmenu_run
 # There also is the (new) i3-dmenu-desktop which only displays applications shipping a .desktop file. It is a wrapper around dmenu, so you need that installed.
-# bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
-#bindsym $mod+F1 exec rofi -show run
 bindsym $mod+F1 exec i3-dmenu-desktop --dmenu="dmenu -i -l 15 -fn Monospace-18 -nb '#2c2c2e' -nf '#ff944d' -sb '#040404' -sf '#ff6600' "
 bindsym $mod+F8 exec dmenu_run -i -l 15 -fn Monospace-18 -nb '#2c2c2e' -nf '#ff944d' -sb '#040404' -sf '#ff6600'
-#Script Launcher
+
+# Script Launcher
 bindsym $mod+F2 exec ~/scripts/no_terminal/scriptstart_noterminal.sh
 bindsym $mod+F3 exec ~/scripts/no_terminal/scriptstart_interminal.sh
 
-#Unicode Selection Launcher
+# Unicode Selection Launcher
 bindsym $mod+F6 exec ~/scripts/no_terminal/unicode_characters.sh
 
-#Password Selection Launcher
+# Password Selection Launcher
 bindsym $mod+F7 exec ~/scripts/no_terminal/passmenu.sh
 
-#Dictionary
+# Dictionary
 bindsym $mod+F9 exec ~/scripts/no_terminal/dictionary-english.sh
 
-# change focus
+# Change focus
 bindsym $mod+h focus left
 bindsym $mod+j focus down
 bindsym $mod+k focus up
 bindsym $mod+l focus right
-# alternatively, you can use the cursor keys:
+# Alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
 bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
-# move focused window
+# Move focused window
 bindsym $mod+Shift+h move left
 bindsym $mod+Shift+j move down
 bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
-# alternatively, you can use the cursor keys:
+# Alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
 bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
-# split in horizontal orientation
+# Split in horizontal orientation
 bindsym $mod+n split h
-# split in vertical orientation
+# Split in vertical orientation
 bindsym $mod+m split v
-# enter fullscreen mode for the focused container
+# Enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
 
-# change container layout (stacked, tabbed, toggle split)
+# Change container layout (stacked, tabbed, toggle split)
 bindsym $mod+y layout stacking
 bindsym $mod+t layout tabbed
 bindsym $mod+u layout toggle split
 
-# toggle tiling / floating
+# Toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
 
-# change focus between tiling / floating windows
+# Change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
 
-# focus the parent container
+# Focus the parent container
 bindsym $mod+o focus parent
-
-# focus the child container
+# Focus the child container
 bindsym $mod+i focus child
 
-####pin workspaces to specific monitors
+#### Pin workspaces to specific monitors
+workspace $ws0 output $monitor3
 workspace $ws1 output $monitor1
 workspace $ws2 output $monitor1
-###workspace $ws0 output $monitor2
-###workspace $ws8 output $monitor2
+#workspace $ws8 output $monitor2
 workspace $ws9 output $monitor2
 workspace $ws10 output $monitor2
-###workspace $ws18 output $monitor2
-###workspace $ws19 output $monitor2
-###workspace $ws20 output $monitor2
-###workspace $ws28 output $monitor2
-###workspace $ws29 output $monitor2
+workspace $ws11 output $monitor3
+#workspace $ws18 output $monitor2
+#workspace $ws19 output $monitor2
+#workspace $ws20 output $monitor2
+#workspace $ws28 output $monitor2
+#workspace $ws29 output $monitor2
 
 
-# switch to workspace
+# Switch to workspace
 bindsym $mod+0 workspace $ws0
 bindsym $mod+1 workspace $ws1 
 bindsym $mod+2 workspace $ws2
@@ -252,7 +254,7 @@ bindsym $mod+7 workspace $ws7
 bindsym $mod+8 workspace $ws8
 bindsym $mod+9 workspace $ws9
 
-# move focused container to workspace
+# Move focused container to workspace
 bindsym $mod+Shift+0 move container to workspace $ws0
 bindsym $mod+Shift+1 move container to workspace $ws1
 bindsym $mod+Shift+2 move container to workspace $ws2
@@ -275,7 +277,7 @@ mode  "Alternate Workspaces 1" {
         bindsym $mod+7 workspace $ws17
         bindsym $mod+8 workspace $ws18
         bindsym $mod+9 workspace $ws19
-        
+
         bindsym $mod+Shift+0 move container to workspace $ws10
         bindsym $mod+Shift+1 move container to workspace $ws11
         bindsym $mod+Shift+2 move container to workspace $ws12
@@ -301,7 +303,7 @@ mode  "Alternate Workspaces 2" {
         bindsym $mod+7 workspace $ws27
         bindsym $mod+8 workspace $ws28
         bindsym $mod+9 workspace $ws29
-        
+
         bindsym $mod+Shift+0 move container to workspace $ws20
         bindsym $mod+Shift+1 move container to workspace $ws21
         bindsym $mod+Shift+2 move container to workspace $ws22
@@ -316,22 +318,22 @@ mode  "Alternate Workspaces 2" {
         bindsym Escape mode "default"
         bindsym Return mode "default"
 }
-#Select workspace mode w/ alt+~ key etc
+# Select workspace mode w/ alt+~ key etc
 bindsym $mod+grave mode "Alternate Workspaces 1"
 bindsym $mod+Shift+grave mode "Alternate Workspaces 2"
 
-#Gaps adjustment
+# Gaps adjustment
 bindsym $mod+s gaps inner current plus 5
 bindsym $mod+Shift+s gaps inner current minus 5
 bindsym $mod+z gaps outer current plus 5
 bindsym $mod+Shift+z gaps outer current minus 5
 bindsym $mod+F11 gaps inner current set 0; gaps outer current set 0
 
-# reload the configuration file
+# Reload the configuration file
 bindsym $mod+Shift+c reload
-# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+# Restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
-# exit i3 (logs you out of your X session)
+# Exit i3 (logs you out of your X session)
 #bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 # resize window (you can also use the mouse for that)
@@ -361,69 +363,84 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-#lock screen
+# Lock screen
 bindsym $mod+shift+x exec i3lock
 
-#video control
-bindsym $mod+q exec arandr
-#Brightness Controls
+# Video control
+bindsym $mod+Shift+q exec arandr
+# Brightness Controls
 bindsym XF86MonBrightnessUp exec xbacklight +10
 bindsym XF86MonBrightnessDown exec xbacklight -10
 
-#audio control
-bindsym $mod+Shift+q exec pavucontrol
-#audio keybindings
+# Audio control
+bindsym $mod+q exec pavucontrol
+# Audio keybindings
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5%
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5%
-bindysm XF86AudioMute exec --nostartup-id pactl set-sink-mute 0 toggle
+bindsym XF86AudioMute exec --nostartup-id pactl set-sink-mute 0 toggle
 
-#printer control
+# Printer control
 bindsym $mod+p exec system-config-printer
 #network control
 bindsym $mod+Shift+p exec nm-connection-editor
 
-#various program keybindings
+# Various program keybindings
 bindsym $mod+e exec $term -e ranger
 bindsym $mod+shift+e exec $explorer
 #bindsym $mod+w exec $browser
-bindsym $mod+shift+w exec waterfox
+#bindsym $mod+shift+w exec waterfox
 
-#Screenshot keybindings
+# Screenshot keybindings
 bindsym Print exec scrot
 bindsym Shift+Print exec scrot -u
 
+# Stop windows from closing from keybinding
+bindsym ctrl+q exec ~/scripts/nothing.sh
+
+# Notifications with dunst
+bindsym $mod+mod1+grave exec dunstctl close-all
+bindsym $mod+mod1+space exec dunstctl history-pop
+
 
 ##### Workspace Assignments #####
-#to get the class for an application, run xprop and then focus on that application. xprop will print a bunch of info, take the string given for WM_CLASS(String) = ...
-#assign [class="Clementine"] $ws10
-#assign [class="Spotify"] $ws10
+# To get the class for an application, run xprop and then focus on that application. xprop will print a bunch of info, take the string given for WM_CLASS(String) = ...
+assign [class="spotify"] $ws0
+assign [class="discord"] $ws9
+assign [class="steam"] $ws7
+assign [class="steamwebhelper"] $ws7
+assign [class="pavucontrol"] $ws11
 
-##### Autostarts #####
+# Fuck ea origin
+for_window [instance="origin.exe"] floating enable
+for_window [instance="OriginThinSetup.exe"] floating enable
+for_window [instance="*[Oo]rigin*"] floating enable
 
-#Music
-#exec --nostartup-id i3msg $ws10
-#exec $music $ws10
+# Set opacity to 0 for zoom screen sharing
+#exec_always --no-startup-id picom -o 0 ```
+#for_window [class="zoom"] floating enable
 
-#stop windows from closing from keybinding
-bindsym ctrl+q exec ~/scripts/nothing.sh
+
 
 #stops screen from immediately turning off
 #can check with xset q
 #see https://wiki.archlinux.org/index.php/Display_Power_Management_Signaling
 exec xset s off -dpms
 
-#Notifications with dunst
-bindsym $mod+mod1+grave exec dunstctl close-all
-bindsym $mod+mod1+space exec dunstctl history-pop
+##### Autostarts #####
 
-#fuck ea origin
-for_window [instance="origin.exe"] floating enable
-for_window [instance="OriginThinSetup.exe"] floating enable
-for_window [instance="*[Oo]rigin*"] floating enable
+#exec --no-startup-id i3-msg workspace $ws11
+#exec pavucontrol
+#exec --no-startup-id i3-msg workspace $ws12
+#exec ~/scripts/in_terminal/email.sh
+#exec --no-startup-id i3-msg workspace $ws0
+#exec $music
+#exec --no-startup-id i3-msg workspace $ws1
+#exec $browser
+#exec --no-startup-id sleep 3
+#exec --no-startup-id i3-msg workspace $ws9
+#exec discord
+#exec --no-startup-id sleep 10
+#exec --no-startup-id i3-msg workspace $ws1
 
-#want yad to always float
-for_window [instance="yad *"] floating enable
+exec ~/scripts/no_terminal/i3_startup.sh
 
-#set opacity to 0 for zoom screen sharing
-#exec_always --no-startup-id picom -o 0 ```
-#for_window [class="zoom"] floating enable
