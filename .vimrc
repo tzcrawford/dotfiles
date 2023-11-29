@@ -141,7 +141,8 @@ imap <F1> <Esc>
 set ic               "will ignore case when searching
 set incsearch        "search as characters are entered
 set hlsearch         "highlight matches
-
+set autoread         "automatically discard changes and reload file 
+                     "combine this with vim-autoread extension since tui vim will not run autoread without some sort of event trigger.
 
 
 "SHELL COMMANDS AND MORE ON WRITING FILES

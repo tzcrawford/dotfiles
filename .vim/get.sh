@@ -41,4 +41,21 @@ git clone https://github.com/dense-analysis/ale
 cd $VIMDIR/bundle/
 git clone https://github.com/OmniSharp/omnisharp-vim
 
+# install svelte syntax highlighting
+cd $VIMDIR/bundle/
+git clone https://github.com/othree/html5.vim.git
+git clone https://github.com/pangloss/vim-javascript.git
+git clone https://github.com/evanleck/vim-svelte.git
 
+# install covim for collaborative editing.... Requires python2 and recompile with python2 option.
+#cd $VIMDIR/bundle/
+#git clone https://github.com/FredKSchott/CoVim.git
+
+
+# install multiplayer.vim for collaborative/simultaneous editing
+cd $VIMDIR/bundle/
+git clone https://github.com/rolf007/multiplayer.vim.git
+
+# autoread is not functional, this will fix it
+cd $VIMDIR/bundle/
+git clone https://github.com/djoshea/vim-autoread.git
