@@ -7,8 +7,9 @@
 #USEDVRAM=$(sudo cat /sys/kernel/debug/dri/0/amdgpu_vram_mm | grep "total:" | sed -e 's/,//' | cut -d ' ' -f 4)
 #TOTALVRAM=$(sudo cat /sys/kernel/debug/dri/0/amdgpu_vram_mm | grep "total:" | sed -e 's/,//' | cut -d ' ' -f 2)
 
-USEDVRAM="$(sudo cat /sys/kernel/debug/dri/0/amdgpu_vram_mm | grep -E "^ *usage:" | cut -d ' ' -f 4)"
-TOTALVRAM="$(sudo cat /sys/kernel/debug/dri/0/amdgpu_vram_mm | grep -E "^ *size:"  | cut -d ' ' -f 4)"
+DIR1="$(sudo /bin/ls /sys/kernel/debug/dri/ | head -n 1)"
+USEDVRAM="$(sudo cat /sys/kernel/debug/dri/${DIR1}/amdgpu_vram_mm | grep -E "^ *usage:" | cut -d ' ' -f 4)"
+TOTALVRAM="$(sudo cat /sys/kernel/debug/dri/${DIR1}/amdgpu_vram_mm | grep -E "^ *size:"  | cut -d ' ' -f 4)"
 
 #echo $VLOAD
 #echo $USEDVRAM
