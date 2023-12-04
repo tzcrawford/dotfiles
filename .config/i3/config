@@ -236,6 +236,7 @@ workspace $ws2 output $monitor1
 workspace $ws9 output $monitor2
 workspace $ws10 output $monitor2
 workspace $ws11 output $monitor3
+workspace $ws12 output $monitor2
 #workspace $ws18 output $monitor2
 #workspace $ws19 output $monitor2
 #workspace $ws20 output $monitor2
