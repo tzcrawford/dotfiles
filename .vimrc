@@ -377,11 +377,11 @@ nnoremap <leader><C-k> :lprevious<CR>
 
 "ALE Linting
 " Here we only want to enable ALE linting for a particular set of filetypes
-let g:ale_enabled = 0
+let g:ale_enabled = 1
 let fts = ['cs']
 if index(fts, &filetype) == -1
-    " Could find current file type in list fts above
-    let g:ale_enabled = 1
+    " Could not find current file type in list fts above
+    let g:ale_enabled = 0
 endif
 let g:ale_linters = {'cs': ['OmniSharp'], 'javascript': ['eslint']}
 "disable text at the end of lines
