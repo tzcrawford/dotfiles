@@ -376,16 +376,25 @@ nnoremap <leader><C-j> :lnext<CR>
 nnoremap <leader><C-k> :lprevious<CR>
 
 "ALE Linting
-let g:ale_linters = {'cs': ['OmniSharp']}
+" Here we only want to enable ALE linting for a particular set of filetypes
+let g:ale_enabled = 0
+let fts = ['cs']
+if index(fts, &filetype) == -1
+    " Could find current file type in list fts above
+    let g:ale_enabled = 1
+endif
+let g:ale_linters = {'cs': ['OmniSharp'], 'javascript': ['eslint']}
 "disable text at the end of lines
 let g:ale_virtualtext_cursor = 'disabled'
 "let g:ale_sign_error = '>>'
 let g:ale_sign_error = '>'
 "let g:ale_sign_warning = '--'
 let g:ale_sign_warning = '-'
+
 "Remove highlighting in sign gutter
 "highlight clear ALEErrorSign
 "highlight clear ALEWarningSign
+"
 "Remove highlighting for SpellBad, SpellCap, error, todo
 let g:ale_set_highlights = 0
 "Hightlight errors with one color
