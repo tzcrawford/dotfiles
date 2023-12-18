@@ -387,8 +387,8 @@ bindsym $mod+p exec system-config-printer
 bindsym $mod+Shift+p exec nm-connection-editor
 
 # Various program keybindings
-bindsym $mod+e exec $term -e ranger
-bindsym $mod+shift+e exec $explorer
+bindsym $mod+e exec $explorer
+#bindsym $mod+shift+e exec $term -e ranger
 #bindsym $mod+w exec $browser
 #bindsym $mod+shift+w exec waterfox
 

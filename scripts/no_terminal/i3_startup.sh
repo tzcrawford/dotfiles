@@ -1,6 +1,6 @@
 #!/bin/sh
 i3-msg 'workspace 11; exec pavucontrol'
-sleep 1
+sleep 2
 i3-msg 'workspace 11; exec alacritty -e bluetoothctl'
 sleep 2
 i3-msg 'workspace 12; exec alacritty -e ~/scripts/in_terminal/email.sh'
