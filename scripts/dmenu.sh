@@ -3,7 +3,7 @@
 # This looks prettier than regular dmenu
 
 FONTFAMILY="monospace"
-if xrandr | grep "*" | grep "3840" ; then # Screen is 4k
+if xrandr | grep "*" | grep "3840" >/dev/null ; then # Screen is 4k
     FONTSIZE=32 
     NUMLINES=15
 else 
