@@ -290,7 +290,8 @@ nnoremap <leader>P "*p
 
 "AUTOCOMPLETION
 "uses AUTOCOMPLPOP extension for on-the-fly auto-completion
-set omnifunc=syntaxcomplete#Complete "Use all syntax completion options all the time
+"set omnifunc=syntaxcomplete#Complete "Use all syntax completion options all the time
+"We Instead use vim-lsp for syntax completion below with set omnifunc=lsp
 "au FileType cs set omnifunc=syntaxcomplete#Complete
 
 "autocomplete from the spell check dictionary
@@ -311,7 +312,6 @@ let g:acp_behaviorKeywordLength = 1
 "remap carriage return/enter so that it doesn't autocomplete,
 inoremap <expr> <CR> pumvisible() ? '<C-e><CR>' : '<CR>'
 
-
 "Fill with your selection using CTRL+l
 "remap Ctrl+l to select first option in autocomplete if menu has spawned
 "inoremap <expr> <C-l> pumvisible() ? '<CR>' : '<CR>' "This one does not run menu manually (below)
@@ -331,6 +331,36 @@ inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<Up>"
 
 "How much space the autocomplete menu takes up
 set pumheight=8 "how many recommendations to give default is all space (100?)
+
+
+"LANGUAGE-SPECIFIC AUTOCOMPLETION POPUPS
+function! s:on_lsp_buffer_enabled() abort
+    "setlocal omnifunc=lsp#complete
+    set omnifunc=lsp#complete
+    "setlocal signcolumn=yes
+    nmap <buffer> gi <plug>(lsp-definition) " Go to definition
+    nmap <buffer> gd <plug>(lsp-declaration) " Go to declaration. Useful for languages such as C/C++ where there is a clear distinction between declaration and definition.
+    nmap <buffer> gr <plug>(lsp-references) " Find all references
+    nmap <buffer> gl <plug>(lsp-document-diagnostics) " Gets document diagnostics and opens in location-list (a window-local quickfix list)
+    nmap <buffer> <f2> <plug>(lsp-rename) " What does this do? Renames the symbol???
+    nmap <buffer> <f3> <plug>(lsp-hover) " Show a popup or a preview window containing details about the symbol hovering over
+endfunction
+
+let g:lsp_diagnostics_enabled=0 " Hide warnings
+call lsp#disable_diagnostics_for_buffer()
+let g:lsp_document_code_action_signs_enabled = 0 " Hide code action signs
+"let g:lsp_signature_help_enabled = 0 " Disable support for signature help i.e. information about the parameters and their types for a function or method call as you are typing it
+"let g:lsp_show_workspace_edits = 0 " Disable workspace edits i.e. operations that involve modifying the code in a more complex way than a single text edit.
+
+let g:lsp_hover_ui = 'float' " Default UI behavior for LspHover
+
+"let g:lsp_preview_float = 0 " Opens preview windows as normal windows (split)
+let g:lsp_preview_float = 1 " Opens preview windows as floating
+let g:lsp_preview_autoclose = 1 " Opens preview windows as floating
+
+"let g:lsp_peek_alignment = 'bottom' " How to align the location of interest for :LspPeekDefinition as an example ... not working?
+
+let g:lsp_semantic_enabled = 1 " Semantic highlighting
 
 
 

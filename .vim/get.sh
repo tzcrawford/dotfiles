@@ -1,61 +1,66 @@
-#!/bin/sh
+#!/bin/bash
 #installs vim addons
 VIMDIR=~/.vim/
 
-#using pathogen to install addons!
-mkdir $VIMDIR/autoload > /dev/null 2>&1
-cd $VIMDIR/autoload
+# using pathogen to install addons!
+mkdir "$VIMDIR/autoload" > /dev/null 2>&1
+cd "$VIMDIR/autoload"
 git clone https://github.com/tpope/vim-pathogen.git
-#add to vimrc (uncommented):
+mv vim-pathogen/autoload/pathogen.vim "$VIMDIR/autoload/"
+rm -rf "$VIMDIR/autoload/vim-pathogen"
+# add to vimrc (uncommented):
 #execute pathogen#infect()
 #execute pathogen#helptags()
 
-#install vim autocomlpop
-cd $VIMDIR/bundle
-git clone https://github.com/vim-scripts/AutoComplPop
+# We will loop over each of the plugin names that we describe in this array
+pluginArray=()
+
+# autocomlpop for autocompletions
+pluginArray+=("vim-scripts/AutoComplPop")
 #make sure to add/enable options in vimrc
 
-#install syntastic
-cd $VIMDIR/bundle/
-git clone https://github.com/scrooloose/syntastic
+#automatic language server configuration
+pluginArray+=("prabirshrestha/vim-lsp")
+
+#automatic install of language server libraries
+pluginArray+=("mattn/vim-lsp-settings")
+
+# syntastic for syntax checking
+pluginArray+=("scrooloose/syntastic")
 #make sure to add/enable options in vimrc
 
-#install loremipsum
-cd $VIMDIR/bundle/
-git clone https://github.com/vim-scripts/loremipsum
-#make sure to add/enable options in vimrc
+# ale for linting
+pluginArray+=("dense-analysis/ale")
 
-#install loremipsum
-cd $VIMDIR/bundle/
-git clone https://github.com/vim-scripts/loremipsum
+# covim for collaborative editing
+# !!!Requires python2 and recompile with python2 option!!!
+#git clone https://github.com/FredKSchott/CoVim
 
-#install vim-mathematica
-#cd $VIMDIR/bundle/
-#git clone git@github.com:rsmenon/vim-mathematica.git
-
-# install ale for linting
-cd $VIMDIR/bundle/
-git clone https://github.com/dense-analysis/ale 
-
-# install omnisharp for c#/c++/unity
-cd $VIMDIR/bundle/
-git clone https://github.com/OmniSharp/omnisharp-vim
-
-# install svelte syntax highlighting
-cd $VIMDIR/bundle/
-git clone https://github.com/othree/html5.vim.git
-git clone https://github.com/pangloss/vim-javascript.git
-git clone https://github.com/evanleck/vim-svelte.git
-
-# install covim for collaborative editing.... Requires python2 and recompile with python2 option.
-#cd $VIMDIR/bundle/
-#git clone https://github.com/FredKSchott/CoVim.git
-
-
-# install multiplayer.vim for collaborative/simultaneous editing
-cd $VIMDIR/bundle/
-git clone https://github.com/rolf007/multiplayer.vim.git
+# multiplayer.vim for collaborative/simultaneous editing
+pluginArray+=("rolf007/multiplayer.vim")
 
 # autoread is not functional, this will fix it
-cd $VIMDIR/bundle/
-git clone https://github.com/djoshea/vim-autoread.git
+# (automatically refreshes content if saved elsewhere)
+pluginArray+=("djoshea/vim-autoread")
+
+#install loremipsum
+pluginArray+=("vim-scripts/loremipsum")
+#make sure to add/enable options in vimrc
+
+# install svelte syntax highlighting
+pluginArray+=("othree/html5.vim")
+pluginArray+=("pangloss/vim-javascript")
+pluginArray+=("evanleck/vim-svelte")
+
+# install omnisharp for c#/c++/unity
+pluginArray+=("OmniSharp/omnisharp-vim")
+
+#install vim-mathematica for mathematica support
+#pluginArray+=("rsmenon/vim-mathematica")
+
+
+for i in "${pluginArray[@]}" ; do
+    cd "$VIMDIR/bundle/"
+    git clone "https://github.com/${i}.git"
+done
+
