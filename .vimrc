@@ -1,3 +1,15 @@
+"Need the following for this to apply in Windows I think
+if has('win32') || has('win64')
+    "set runtimepath=~/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,~/.vim/after
+    set runtimepath=C:\Users\zcrawford\Vim\vim90,U:\.vim,U:\.vim\after
+    set backspace=indent,eol,start
+    set vb
+    set t_vb=
+    "gvim font
+    set guifont=Cascadia_Code:h16
+endif
+
+
 " VIM RUN COMMANDS
 " YOU CAN IMMEDIATELY APPLY ANY CHANGES TO THIS CONFIGURATION FILE BY RUNNING ':source ~/.vimrc' IN ANY VIM SESSION
 " THIS VIMRC FILE SHOULD SERVE AS A TEMPLATE AND INTRODUCTION
@@ -534,51 +546,6 @@ set fileencoding=utf-8
 
 
 
-"HTML MACROS
-autocmd FileType html nmap <leader>b i<b></b><Space><++><Esc>FbT>i
-autocmd FileType html nmap <leader>it i<em></em><Space><++><Esc>FeT>i
-autocmd FileType html nmap <leader>h1 i<h1></h1><Enter><Enter><++><Esc>2kf<i
-autocmd FileType html nmap <leader>h2 i<h2></h2><Enter><Enter><++><Esc>2kf<i
-autocmd FileType html nmap <leader>h3 i<h3></h3><Enter><Enter><++><Esc>2kf<i
-autocmd FileType html nmap <leader>p i<p></p><Enter><Enter><++><Esc>02kf>a
-autocmd FileType html nmap <leader>a i<a<Space>href=""><++></a><Space><++><Esc>14hi
-autocmd FileType html nmap <leader>e i<a<Space>target="_blank"<Space>href=""><++></a><Space><++><Esc>14hi
-autocmd FileType html nmap <leader>ul i<ul><Enter><li></li><Enter></ul><Enter><Enter><++><Esc>03kf<i
-autocmd FileType html nmap <leader>li i<Esc>o<li></li><Esc>F>a
-autocmd FileType html nmap <leader>ol i<ol><Enter><li></li><Enter></ol><Enter><Enter><++><Esc>03kf<i
-autocmd FileType html nmap <leader>im i<img src="" alt="<++>"><++><esc>Fcf"a
-autocmd FileType html nmap <leader>td i<td></td><++><Esc>Fdcit
-autocmd FileType html nmap <leader>tr i<tr></tr><Enter><++><Esc>kf<i
-autocmd FileType html nmap <leader>th i<th></th><++><Esc>Fhcit
-autocmd FileType html nmap <leader>table i<table><Enter></table><Esc>O
-autocmd FileType html nmap <leader>code i<code></code><Esc>F>a
-autocmd FileType html nmap <leader>green i<font color="green"></font><Esc>F>a
-autocmd FileType html nmap <leader>red i<font color="red"></font><Esc>F>a
-autocmd FileType html nmap <leader>yellow i<font color="yellow"></font><Esc>F>a
-autocmd FileType html nmap <leader>dt i<dt></dt><Enter><dd><++></dd><Enter><++><esc>2kcit
-autocmd FileType html nmap <leader>dl i<dl><Enter><Enter></dl><enter><enter><++><esc>3kcc
-autocmd FileType html nmap &<space> &amp;<space>
-autocmd FileType html nmap á &aacute;
-autocmd FileType html nmap é &eacute;
-autocmd FileType html nmap í &iacute;
-autocmd FileType html nmap ó &oacute;
-autocmd FileType html nmap ú &uacute;
-autocmd FileType html nmap ä &auml;
-autocmd FileType html nmap ë &euml;
-autocmd FileType html nmap ï &iuml;
-autocmd FileType html nmap ö &ouml;
-autocmd FileType html nmap ü &uuml;
-autocmd FileType html nmap ã &atilde;
-autocmd FileType html nmap ẽ &etilde;
-autocmd FileType html nmap ĩ &itilde;
-autocmd FileType html nmap õ &otilde;
-autocmd FileType html nmap ũ &utilde;
-autocmd FileType html nmap ñ &ntilde;
-autocmd FileType html nmap à &agrave;
-autocmd FileType html nmap è &egrave;
-autocmd FileType html nmap ì &igrave;
-autocmd FileType html nmap ò &ograve;
-autocmd FileType html nmap ù &ugrave;
 "LATEX MACROS
 autocmd FileType tex map <leader>w :w !detex \| wc -w<CR>
 autocmd FileType tex nmap <leader>fr i\begin{frame}<Enter>\frametitle{}<Enter><Enter><++><Enter><Enter>\end{frame}<Enter><Enter><++><Esc>6kf}i
@@ -621,4 +588,61 @@ autocmd FileType bib nmap <leader>a i@article{<Enter>author<Space>=<Space>{<++>}
 autocmd FileType bib nmap <leader>b i@book{<Enter>author<Space>=<Space>{<++>},<Enter>year<Space>=<Space>{<++>},<Enter>title<Space>=<Space>{<++>},<Enter>publisher<Space>=<Space>{<++>},<Enter>}<Enter><++><Esc>6kA,<Esc>i
 autocmd FileType bib nmap <leader>c i@incollection{<Enter>author<Space>=<Space>{<++>},<Enter>title<Space>=<Space>{<++>},<Enter>booktitle<Space>=<Space>{<++>},<Enter>editor<Space>=<Space>{<++>},<Enter>year<Space>=<Space>{<++>},<Enter>publisher<Space>=<Space>{<++>},<Enter>}<Enter><++><Esc>8kA,<Esc>i
 
+"HTML MACROS
+autocmd FileType html nmap &<space> &amp;<space>
+autocmd FileType html nmap á &aacute;
+autocmd FileType html nmap é &eacute;
+autocmd FileType html nmap í &iacute;
+autocmd FileType html nmap ó &oacute;
+autocmd FileType html nmap ú &uacute;
+autocmd FileType html nmap ä &auml;
+autocmd FileType html nmap ë &euml;
+autocmd FileType html nmap ï &iuml;
+autocmd FileType html nmap ö &ouml;
+autocmd FileType html nmap ü &uuml;
+autocmd FileType html nmap ã &atilde;
+autocmd FileType html nmap ẽ &etilde;
+autocmd FileType html nmap ĩ &itilde;
+autocmd FileType html nmap õ &otilde;
+autocmd FileType html nmap ũ &utilde;
+autocmd FileType html nmap ñ &ntilde;
+autocmd FileType html nmap à &agrave;
+autocmd FileType html nmap è &egrave;
+autocmd FileType html nmap ì &igrave;
+autocmd FileType html nmap ò &ograve;
+autocmd FileType html nmap ù &ugrave;
 
+" VB.NET macros
+autocmd BufReadPost *.aspx nmap <leader>b a<b></b><Space><++><Esc>FbT>i
+autocmd BufReadPost *.aspx nmap <leader>it a<em></em><Space><++><Esc>FeT>i
+autocmd BufReadPost *.aspx nmap <leader>h1 a<h1></h1><Enter><Enter><++><Esc>2kf<i
+autocmd BufReadPost *.aspx nmap <leader>h2 a<h2></h2><Enter><Enter><++><Esc>2kf<i
+autocmd BufReadPost *.aspx nmap <leader>h3 a<h3></h3><Enter><Enter><++><Esc>2kf<i
+autocmd BufReadPost *.aspx nmap <leader>p a<p></p><Enter><Enter><++><Esc>02kf>a
+autocmd BufReadPost *.aspx nmap <leader>a a<a<Space>href=""><++></a><Space><++><Esc>14hi
+autocmd BufReadPost *.aspx nmap <leader>im a<img src="" alt="<++>"><Space><++><Esc>Fcf"a
+autocmd BufReadPost *.aspx nmap <leader>e a<a<Space>target="_blank"<Space>href=""><++></a><Space><++><Esc>14hi
+autocmd BufReadPost *.aspx nmap <leader>ul a<ul><Enter></ul><++><Esc>O<Tab>
+autocmd BufReadPost *.aspx nmap <leader>ol a<ol><Enter></ol><++><Esc>O<Tab>
+autocmd BufReadPost *.aspx nmap <leader>li a<li></li><++><Esc>8hi
+autocmd BufReadPost *.aspx nmap <leader>table a<table><Enter></table><Space><++><Esc>O<Tab>
+autocmd BufReadPost *.aspx nmap <leader>tr a<tr><Enter></tr><Space><++><Esc>O<Tab>
+autocmd BufReadPost *.aspx nmap <leader>td a<td></td><Space><++><Esc>FdT>i
+autocmd BufReadPost *.aspx nmap <leader>code a<code></code><Esc>F>a
+
+
+autocmd BufReadPost *.aspx nmap <leader>btn a<asp:Button ID="btn<++>" runat="server" Text="<++>" /><++><Esc>0<leader><leader>
+autocmd BufReadPost *.aspx nmap <leader>lbl a<asp:Label ID="lbl<++>" runat="server" Text="<++>" /><++><Esc>0<leader><leader>
+autocmd BufReadPost *.aspx nmap <leader>tb a<asp:TextBox ID="tb<++>" runat="server" Text="<++> Visible="<++>" Enabled="<++>" Rows="<++>" Width="<++>" MaxHeight="<++>" /><++><Esc>0<leader><leader>
+autocmd BufReadPost *.aspx nmap <leader>cb a<asp:CheckBox ID="cb<++>" runat="server" DataSourceID="<++>" DataValueField="<++>" AppendDataBoundItems="<++>" Checked="<++>" Enabled="<++>" Visible="<++>" /><++><Esc>0<leader><leader>
+autocmd BufReadPost *.aspx nmap <leader>ddl a<asp:DropDownList ID="ddl<++>" runat="server" AutoPostBack="<++>" Visible="<++>" Enabled="<++>" OnSelectedIndexChanged="<++>" ><++></asp:DropDownList><Esc>0<leader><leader>
+autocmd BufReadPost *.aspx nmap <leader>pnl a<asp:Panel ID="pn<++>" runat="server" Visible="True" BackColor="#ffffff" ><Return><Tab><++><Return><Backspace></asp:Panel><Esc>--0<leader><leader>
+autocmd BufReadPost *.aspx nmap <leader>sds a<asp:SqlDataSource ID="sds<++>" runat="server" ConnectionString="<%$ ConnectionStrings:<++>ConnectionString %>"<Return><Tab>SelectCommand="<Return><Tab><++><Return><BackSpace>" UpdateCommand="<Return><Tab><++><Return><Backspace>" DeleteCommand="<Return><Tab><++><Return><BackSpace>" InsertCommand="<Return><Tab><++><Return><BackSpace>"><Return><Tab><SelectParameters><Return><Tab><asp:ControlParameter ControlID="<++>" Name="<++>" PropertyName="<++>" /><Return><BackSpace></SelectParameters><Return><UpdateParameters><Return><Tab><asp:ControlParameter ControlID="<++>" Name="<++>" PropertyName="<++>" /><Return><BackSpace></UpdateParameters><Return><DeleteParameters><Return><Tab><asp:ControlParameter ControlID="<++>" Name="<++>" PropertyName="<++>" /><Return><BackSpace></DeleteParameters><Return><InsertParameters><Return><Tab><asp:ControlParameter ControlID="<++>" Name="<++>" PropertyName="<++>" /><Return><BackSpace></InsertParameters><Return><BackSpace><BackSpace></asp:SqlDataSource><Esc>----------------------0
+autocmd BufReadPost *.aspx nmap <leader>gv a<asp:GridView ID="gv<++>" runat="server"<Return><Tab>DataSourceID="sds<++>" DataKeyNames="<++>" AutoGenerateColumns="<++>" AutoPostBack="<++>"<Return>AllowPaging="True" AllowSorting="True" PageSize="<++>"<Return>CellPadding="<++>" CellSpacing="<++>" HorizontalAlign="<++>"<Return>BackColor="<++>" BorderColor="<++>" BorderStyle="Ridge" BorderWidth="<++>" Gridlines="None"<Return><BackSpace>><Return><Tab><FooterStyle BackColor="<++>" ForeColor="<++>" /><Return><HeaderStyle BackColor="<++>" ForeColor="<++>" HorizontalAlign="<++>" Font-Bold="<++>" /><Return><PagerStyle BackColor="<++>" ForeColor="<++>" HorizontalAlign="Left" /><Return><RowStyle BackColor="<++>" ForeColor="<++>" HorizontalAlign="<++>" /><Return><SelectedRowStyle BackColor="<++>" ForeColor="<++>" HorizontalAlign="<++>" /><Return><SortedAscendingCellStyle BackColor="<++>" /><Return><SortedAscendingHeaderStyle BackColor="<++>" /><Return><SortedDescendingCellStyle BackColor="<++>" /><Return><SortedDescendingHeaderStyle BackColor="<++>" /><Return><AlternatingRowStyle BackColor="<++>" /><Return><EmptyDataTemplate><++></EmptyDataTemplate><Return><Columns><Return><Tab><++><Return><BackSpace></Columns><Return><Backspace></asp:GridView><Esc>---------------------0<leader><leader>
+autocmd BufReadPost *.aspx nmap <leader>bf a<asp:BoundField DataField="<++>" SortExpression="<++>" HeaderText="<++>" /><++><Esc>0<leader><leader>
+autocmd BufReadPost *.aspx nmap <leader>cf a<asp:CommandField ShowSelectButton="<++>" ShowEditButton="<++>" ShowDeleteButton="<++>" /><++><Esc>0<leader><leader>
+autocmd BufReadPost *.aspx nmap <leader>Li a<asp:ListItem Text="<++>" Value="<++>" /><++><Esc>0<leader><leader>
+
+
+"IDK this isn't loading above immediately on Windows, but we can run it when the window has already spawned and it works.
+set omnifunc=lsp#complete
