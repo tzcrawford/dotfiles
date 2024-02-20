@@ -1,28 +1,50 @@
-# i3 config file (v4)
+### sway config file ###
 #
-# Please see https://i3wm.org/docs/userguide.html for a complete reference!
-# Note any i3 settings can be changed temporarily by executing a terminal process `i3-msg _____`
+# Please see https://github.com/swaywm/sway/wiki for a complete reference!
+# Note any sway settings can be changed temporarily by executing a terminal process `swaymsg _____`
 
-##### Multimonitor control with arandr/xrandr #####
-exec ~/scripts/no_terminal/xrandr_dirac.sh
-exec --no-startup-id sleep 5
+##### Multimonitor setup #####
+# Display Aliases
+#set $monitor1 DisplayPort-0
+set $monitor1 DP-1
+set $monitor2 HDMI-A-1
+#set $monitor3 DisplayPort-2
+set $monitor3 DP-3
+#exec ~/scripts/no_terminal/xrandr_dirac.sh # in i3 we would set with arandr/xrandr
+#exec --no-startup-id sleep 5
+#output HDMI-A-0 {
+#    enable mode 1920x1080@60Hz
+#    position 640 0
+#}
+#output DP-1 {
+#    enable mode 2560x1440@164.8Hz
+#    position 0 1080
+#}
+#output DP-2 {
+#    enable mode 1920x1080@60Hz
+#    position 2560 0
+#}
+#output HDMI-A-0 pos 640 0 mode 1920x1080@60Hz
+#output DP-1 pos 0 1080 mode 2560x1440@164.8Hz
+#output DP-2 pos 2560 0 mode 1920x1080@60Hz
+output $monitor2 pos 640 0 mode 1920x1080@60Hz
+output $monitor1 pos 0 1080 mode 2560x1440@164.8Hz
+output $monitor3 pos 2560 0 mode 1920x1080@60Hz
+
+focus output DP-1
 
 ##### Load in .Xresources config #####
 exec xrdb ~/.Xresources
 exec --no-startup-id sleep 3
 
 ##### Change keyboard settings (swap alt/super as mod button) #####
-#exec if pacman -Q | grep -q "xmodmap"; then exec ~/scripts/no_terminal/keyboard.sh; fi;⎈
+#exec if pacman -Q | grep -q "xmodmap"; then exec ~/scripts/no_terminal/keyboard.sh; fi;
 exec pacman -Q | grep -q "xmodmap" && exec ~/scripts/no_terminal/keyboard.sh
 
 ##### Definitions #####
 # Control Aliases
 set $mod mod4
 
-# Display Aliases
-set $monitor1 DisplayPort-0
-set $monitor2 HDMI-A-0
-set $monitor3 DisplayPort-2
 # SystemD Aliases
 set $shutdown sudo shutdown -h now
 set $reboot sudo reboot
@@ -72,12 +94,6 @@ set $ws29 "29"
 set $bg            #2c2c2e
 #bright silver
 set $fg            #9f9f9f
-
-#peach orange
-#set $lo            #ff944d
-#bright orange
-#set $hi            #ff6600
-
 #pure white
 set $lo            #ffffff
 #cyan-white
@@ -106,7 +122,6 @@ gaps outer 15
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
 font pango:DejaVu Sans Mono 8
-#font pango:RuneScape UF 11
 
 
 
@@ -117,29 +132,29 @@ font pango:DejaVu Sans Mono 8
 #}
 
 #bar {
-    #status_command i3blocks -c ~/.config/i3/i3blocks.conf
-    #status_comman polybar
-    #position top
-    #mode dock
-    #modifier None
-    #colors {
-    #    background $bg
-    #    statusline $fg
-    #    separator $lo
-        #                   border          background          text
-    #    focused_workspace   $lo             $bg                 $lo
-    #    active_workspace    $tx             $bg                 $tx
-    #    inactive_workspace  $ia             $bg                 $ia
-    #    urgent_workspace    $hi             $bg                 $hi
-    #}
+#    status_command i3blocks -c ~/.config/i3/i3blocks.conf
+#    position top
+#    mode dock
+#    modifier None
+#    colors {
+#        background $bg
+#        statusline $fg
+#        separator $lo
+#                            border          background          text
+#        focused_workspace   $lo             $bg                 $lo
+#        active_workspace    $tx             $bg                 $tx
+#        inactive_workspace  $ia             $bg                 $ia
+#        urgent_workspace    $hi             $bg                 $hi
+#    }
 #}
 
 # Polybar
-exec ~/.config/polybar/polybarstart.sh
-exec_always ~/.config/polybar/polybarstart.sh
+#exec ~/.config/polybar/polybarstart.sh
+#exec_always ~/.config/polybar/polybarstart.sh
+
 # Compton for Transparency
-exec picom
-exec_always picom
+#exec picom
+#exec_always picom
 
 # Pulse Audio Applet
 #exec --no-startup-id ~/.config/i3/i3_pa-applet
@@ -148,8 +163,8 @@ exec_always picom
 #exec_always --no-startup-id nm-applet
 
 # Wallpaper
-exec ~/scripts/themes/i3_theme_slideshow.sh
-bindsym $mod+F5 exec ~/scripts/themes/themepick.sh
+#exec ~/scripts/themes/i3_theme_slideshow.sh
+#bindsym $mod+F5 exec ~/scripts/themes/themepick.sh
 
 ###### Controls #####
 
@@ -342,16 +357,10 @@ bindsym $mod+Shift+r restart
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
 
-        # Pressing left will shrink the window’s width.
-        # Pressing right will grow the window’s width.
-        # Pressing up will shrink the window’s height.
-        # Pressing down will grow the window’s height.
         bindsym h resize shrink width 10 px or 10 ppt
         bindsym k resize grow height 10 px or 10 ppt
         bindsym j resize shrink height 10 px or 10 ppt
         bindsym l resize grow width 10 px or 10 ppt
-
-        # same bindings, but for the arrow keys
         bindsym Left resize shrink width 10 px or 10 ppt
         bindsym Down resize grow height 10 px or 10 ppt
         bindsym Up resize shrink height 10 px or 10 ppt
@@ -362,24 +371,24 @@ mode "resize" {
         bindsym Escape mode "default"
         bindsym $mod+r mode "default"
 }
-
 bindsym $mod+r mode "resize"
 
 # Lock screen
-bindsym $mod+shift+x exec i3lock
+#bindsym $mod+shift+x exec i3lock
 
 # Video control
-bindsym $mod+Shift+q exec arandr
+#bindsym $mod+Shift+q exec arandr
+
 # Brightness Controls
-bindsym XF86MonBrightnessUp exec xbacklight +10
-bindsym XF86MonBrightnessDown exec xbacklight -10
+bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%-
+bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+
 
 # Audio control
 bindsym $mod+q exec pavucontrol
 # Audio keybindings
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5%
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5%
-bindsym XF86AudioMute exec --nostartup-id pactl set-sink-mute 0 toggle
+bindsym --locked XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5%
+bindsym --locked XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5%
+bindsym --locked XF86AudioMute exec --nostartup-id pactl set-sink-mute 0 toggle
 
 # Printer control
 bindsym $mod+p exec system-config-printer
@@ -390,7 +399,6 @@ bindsym $mod+Shift+p exec nm-connection-editor
 bindsym $mod+e exec $explorer
 #bindsym $mod+shift+e exec $term -e ranger
 #bindsym $mod+w exec $browser
-#bindsym $mod+shift+w exec waterfox
 
 # Screenshot keybindings
 bindsym Print exec scrot
@@ -415,7 +423,7 @@ assign [class="pavucontrol"] $ws11
 # Fuck ea origin
 for_window [instance="origin.exe"] floating enable
 for_window [instance="OriginThinSetup.exe"] floating enable
-for_window [instance="*[Oo]rigin*"] floating enable
+for_window [instance=".*[Oo]rigin.*"] floating enable
 
 # Set opacity to 0 for zoom screen sharing
 #exec_always --no-startup-id picom -o 0 ```
@@ -426,7 +434,7 @@ for_window [instance="*[Oo]rigin*"] floating enable
 #stops screen from immediately turning off
 #can check with xset q
 #see https://wiki.archlinux.org/index.php/Display_Power_Management_Signaling
-exec xset s off -dpms
+#exec xset s off -dpms
 
 ##### Autostarts #####
 
@@ -444,5 +452,5 @@ exec xset s off -dpms
 #exec --no-startup-id sleep 10
 #exec --no-startup-id i3-msg workspace $ws1
 
-exec ~/scripts/no_terminal/i3_startup.sh
+#exec ~/scripts/no_terminal/i3_startup.sh
 

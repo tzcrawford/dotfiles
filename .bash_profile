@@ -46,6 +46,10 @@ export cputemppath=$(for i in /sys/class/hwmon/hwmon*/temp*_input; do echo "$(<$
 if [ $HOSTNAME = dirac ]; then
     export gputemppath=$(for i in /sys/class/hwmon/hwmon*/temp*_input; do echo "$(<$(dirname $i)/name): $(cat ${i%_*}_label 2>/dev/null || echo $(basename ${i%_*})) $(readlink -f $i)"; done | grep "amdgpu: edge" | sed 's/amdgpu: edge //g')
 
+    # For torch etc on ROCM
+    export HSA_OVERRIDE_GFX_VERSION=10.3.0
+    export HCC_AMDGPU_TARGET=gfx1030
+    export PATH=/opt/rocm/bin:$PATH
 fi
 
 ### Any user specific settings ###
@@ -72,12 +76,16 @@ if [ "$(tty)" = "/dev/tty1" ]; then
     echo -e "dbus-update-activation-environment --systemd DBUS_SESSION_BUS_ADDRESS DISPLAY XAUTHORITY\ndunst &\nnumlockx &\nexec /usr/bin/i3" > ~/.xinitrc
     startx
 elif [ "$(tty)" = "/dev/tty2" ]; then
-    if [ "$USER" = "paul" ] ; then echo "exec cinnamon-session" > ~/.xinitrc ; startx ; fi
+    #if [ "$USER" = "paul" ] ; then echo "exec cinnamon-session" > ~/.xinitrc ; startx ; fi
     #echo "dunst &\nnumlockx &\nexec /usr/bin/bspwm" > ~/.xinitrc #bspwm
     #echo -e "dunst &\nnumlockx &\nwhile true; do exec /usr/bin/dwm 2> /dev/null;done" > ~/.xinitrc #dwm
     #startx
+    numlockx & 
+    sway
+    :
 elif [ "$(tty)" = "/dev/tty5" ]; then
-    if [ "$USER" = "paul" ] ; then Hyprland ; fi
+    #if [ "$USER" = "paul" ] ; then Hyprland ; fi
+    :
 else
     :
 fi
