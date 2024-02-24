@@ -1,4 +1,10 @@
 if which "xremap" > /dev/null 2>&1 ; then
+    # To run this script without sudo, you may need to do something the following (in Arch Linux). See the github page on xremap.
+    #   # Ensure uinput is running with `lsmod | grep uinput`. If not,
+    #   echo "uinput" > /etc/modules-load.d/uinput
+    #   # Possibly you may also need to add modconf to /etc/initramfs.conf or something like that.
+    #   echo 'KERNEL=="uinput", GROUP="input", TAG+="uaccess"' | sudo tee /etc/udev/rules.d/99-input.rules
+    #   and reboot
     echo "
 modmap:
   - name: Swap Super and Alt
