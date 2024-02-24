@@ -1,4 +1,11 @@
 if which "xremap" > /dev/null 2>&1 ; then
+    echo "
+modmap:
+  - name: Swap Super and Alt
+    remap:
+      ALT_L: SUPER_L
+      SUPER_L: ALT_L
+" > $XDG_CONFIG_HOME/xremap/xremap.cfg
     xremap $XDG_CONFIG_HOME/xremap/xremap.cfg & disown
 else
     if which "xmodmap" > /dev/null 2>&1 ; then
