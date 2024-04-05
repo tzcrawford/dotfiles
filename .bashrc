@@ -20,6 +20,8 @@ export PATH=$HOME/.local/share/cargo/bin/:$PATH # rust binaries
 #export PATH=/opt/anaconda/bin/:$PATH
 export PATH=$HOME/scripts/in_path:$PATH
 export PATH=$HOME/.local/share/gem/ruby/3.0.0/bin:$PATH
+export PATH=$HOME/.local/bin:$PATH
+export PATH=$HOME/.local/podman/bin:$PATH
 
 # vi mode
 set -o vi
@@ -63,4 +65,10 @@ export MANGOHUD=1
 if command -v wal > /dev/null 2>&1 && [ "$TERM" = "alacritty" ]; then
     # Run 'wal' command with options to recover color scheme, ignore output, and ignore updating other apps
     wal -Rqe
+fi
+
+if [ "$HOSTNAME" = "faraday" ] ; then
+    if ! ( [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ] ) ; then
+        xhost +si:localuser:$USER > /dev/null # Allow GUI applications through distrobox
+    fi
 fi
