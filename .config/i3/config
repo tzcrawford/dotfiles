@@ -232,8 +232,9 @@ bindsym $mod+i focus child
 workspace $ws0 output $monitor3
 workspace $ws1 output $monitor1
 workspace $ws2 output $monitor1
+workspace $ws3 output $monitor2
 #workspace $ws8 output $monitor2
-workspace $ws9 output $monitor2
+workspace $ws9 output $monitor3
 workspace $ws10 output $monitor2
 workspace $ws11 output $monitor3
 workspace $ws12 output $monitor2
