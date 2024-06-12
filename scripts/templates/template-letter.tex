@@ -93,9 +93,15 @@ $endif$
 $if(verbatim-in-note)$
 \usepackage{fancyvrb}
 $endif$
-$if(colorlinks)$
+
 \usepackage{xcolor}
-$endif$
+% Define a command to switch text color
+\newcommand{\startblue}{\begingroup\color{blue}}
+\newcommand{\stopblue}{\endgroup}
+\newcommand{\startred}{\begingroup\color{red}}
+\newcommand{\stopred}{\endgroup}
+
+
 \usepackage{hyperref}
 \hypersetup{
 $if(title-meta)$
