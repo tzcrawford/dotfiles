@@ -1,0 +1,48 @@
+%compile with pdflatex a.tex && biber a && pdflatex a.tex && pdflatex a.tex
+\documentclass[10pt]{article}
+\usepackage[letterpaper,
+            bindingoffset=0.2in,%
+            left=0.75in,right=0.75in,top=0.75in,bottom=0.75in,%
+            footskip=0.25in,]{geometry}
+\setlength{\parindent}{0.5in} %size of paragraph indent
+
+%packages I use a lot, you may want to remove
+\usepackage{graphicx} %allows for the use of images, etc
+\usepackage{caption}
+\DeclareCaptionFormat{fooformat}{#1#2#3\hrulefill}
+
+\usepackage[backend=biber,autocite=superscript,style=chem-acs,sorting=none]{biblatex} %allows for compiling references in superscript acs style. Reference w/ /autocite{}
+%perhaps more resources at https://tex.stackexchange.com/questions/79591/superscripts-in-bibliography-with-bibtex
+
+\usepackage{bigints} %bigger integral signs in equations
+\usepackage{blindtext}
+
+
+\addbibresource{./references.bib}
+\title{INSERT TITLE HERE}
+\author{Your Name}
+\date{1 January 2018}
+
+\begin{document}
+
+\maketitle
+%\section{}
+
+
+
+
+
+
+\printbibliography
+
+\end{document}
+
+%Things you will probably need:
+
+%\begin{figure}[!h]
+%\centering
+%\includegraphics[height=2in,keepaspectratio]{./images/whatever.pdf}
+%\caption{CAPTION HERE\label{FIGURE LABEL HERE}}
+%\end{figure}
+
+%\autocite{REFERENCE TITLE HERE FROM REFERENCES.BIB}
