@@ -26,8 +26,8 @@ function reset_background
     rm -f "$COVER" 
     if [[ -n "$COVER" ]] ; then
         #resize the image's width to 600px 
-        #magick "$src" -resize 600x "$COVER"
-        magick "$src" "$COVER"
+        #magick "$src" -resize 600x "$COVER" >/dev/null 2>&1 
+        magick "$src" "$COVER" >/dev/null 2>&1 
         if [[ -f "$COVER" ]] ; then
            #scale down the cover to 50% of the original
            #place it 50% away from left and 85% away from top.
