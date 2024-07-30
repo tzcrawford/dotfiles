@@ -4,4 +4,4 @@
 #the -delay flag sets the framerate. Supposedly -delay N --> 100/N = FPS, but idk
 #-loop 0  just means infinite repeat
 
-magick convert -delay 0.01 -loop 0 *.jpg output.gif
+magick -delay 0.01 -loop 0 *.jpg output.gif

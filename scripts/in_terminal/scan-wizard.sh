@@ -27,7 +27,7 @@ Scan()
         #png does not support pixels per inch, so I convert to pdf before, theoretically, shrinking to lower DPI
         #If you enter DPI higher than what printer is capable of, you're going to end up with a file larger than it needs to be.
         #I think it experiences unnecessary anti-aliasing?
-        scanimage --format=png $scan_dimensions | magick convert - pdf:- | magick convert -units PixelsPerInch -density $DPI - pdf:- > scan-$file_num.pdf || exit 1
+        scanimage --format=png $scan_dimensions | magick - pdf:- | magick -units PixelsPerInch -density $DPI - pdf:- > scan-$file_num.pdf || exit 1
     fi
 
     ((scan_num++)) #increment page number by 1
