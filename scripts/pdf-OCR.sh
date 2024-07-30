@@ -23,7 +23,7 @@ if lsb_release -a | grep "Arch Linux" > /dev/null; then
 fi
 
 #Convert the pdf to a series of high quality images
-convert -verbose -density 300 "$1" -quality 100 image-%0003d.jpg
+magick convert -verbose -density 300 "$1" -quality 100 image-%0003d.jpg
 
 for i in ./image-*.jpg; do
     tesseract "$i" "$i" pdf

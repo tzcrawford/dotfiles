@@ -1,2 +1,2 @@
 #!/bin/sh
-convert -density 300 -quality 95 -negate "$@"
+magick convert -density 300 -quality 95 -negate "$@"
