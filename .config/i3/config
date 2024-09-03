@@ -22,7 +22,7 @@ set $mod mod4
 # Display Aliases
 set $monitor1 DisplayPort-0
 set $monitor2 HDMI-A-0
-set $monitor3 DisplayPort-2
+set $monitor3 DisplayPort-1
 # SystemD Aliases
 set $shutdown sudo shutdown -h now
 set $reboot sudo reboot
