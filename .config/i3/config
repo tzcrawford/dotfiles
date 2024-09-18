@@ -135,7 +135,7 @@ font pango:DejaVu Sans Mono 8
 #}
 
 # Polybar
-exec ~/.config/polybar/polybarstart.sh
+#exec ~/.config/polybar/polybarstart.sh
 exec_always ~/.config/polybar/polybarstart.sh
 # Compton for Transparency
 exec picom
