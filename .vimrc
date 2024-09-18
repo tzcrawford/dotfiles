@@ -1,7 +1,7 @@
 "Need the following for this to apply in Windows I think
 if has('win32') || has('win64')
-    "set runtimepath=~/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,~/.vim/after
-    set runtimepath=C:\Users\zcrawford\Vim\vim90,U:\.vim,U:\.vim\after
+    set runtimepath=~/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,~/.vim/after
+    "set runtimepath=C:\Users\zcrawford\Vim\vim90,U:\.vim,U:\.vim\after
     set backspace=indent,eol,start
     set vb
     set t_vb=
