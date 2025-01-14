@@ -1,6 +1,7 @@
 #!/bin/bash
 #installs vim addons
 VIMDIR=~/.vim/
+mkdir $VIMDIR/bundle
 
 # using pathogen to install addons!
 mkdir "$VIMDIR/autoload" > /dev/null 2>&1
