@@ -1,7 +1,7 @@
 "Need the following for this to apply in Windows I think
 if has('win32') || has('win64')
     set runtimepath=~/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,~/.vim/after
-    "set runtimepath=C:\Users\zcrawford\Vim\vim90,U:\.vim,U:\.vim\after
+    "set runtimepath=C:\Users\myuser\Vim\vim90,C:\Users\myuser\.vim,U:\.vim,U:\.vim\after
     set backspace=indent,eol,start
     set vb
     set t_vb=
@@ -214,6 +214,13 @@ set wildmode=list,full "list all matches and complete each full match. See ':hel
 "WHITESPACE OPTIONS
 "filetype plugin indent on "allows vim to use indentation settings independent to filetype with config files
 set autoindent "mimics the indentation of the previous line
+"this appears to stop vim from changing the indent of the current line after you press return
+set indentexpr=
+"the following should allow vim to present long lines as wrapped but not enter return characters on your behalf
+set wrap
+set linebreak
+set textwidth=0 
+
 set expandtab "<TAB> just enters 4 spaces rather than a tab character. Important for python whitespace.
 "set tabstop=4 "number of visual spaces per <TAB> character (in previous documents?)
 set shiftwidth=4 "number of visual spaces per << or == or >> command
@@ -448,8 +455,9 @@ let g:ale_set_highlights = 0
 "try :OmniSharpInstall v1.38.1
 "https://github.com/OmniSharp/omnisharp-vim/issues/766
 
-"This is required
-filetype indent plugin on
+"filetype indent plugin on "This was said to be required? I think Omnisharp said it was needed if not using a plugin manager
+filetype indent plugin off "I need to turn it off to get indentexpr declaration to apply
+
 "syntax enable "already done above...
 "let g:OmniSharp_start_server = 0 "disable plugin
 let g:OmniSharp_server_use_mono = 1 "what type of server to use mono or .net
@@ -647,3 +655,4 @@ autocmd BufReadPost *.aspx nmap <leader>Li a<asp:ListItem Text="<++>" Value="<++
 
 "IDK this isn't loading above immediately on Windows, but we can run it when the window has already spawned and it works.
 set omnifunc=lsp#complete
+
