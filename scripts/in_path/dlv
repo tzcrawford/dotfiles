@@ -1,0 +1,28 @@
+#!/bin/sh
+url="$1"
+definition="$2"
+formattingFlags='--add-metadata --output "%(uploader)s - %(title)s.%(ext)s" --write-srt --sub-lang en'
+case $definition in
+    "480"|"720"|"1080"|"1440")
+        formattingFlags="-f 'bestvideo[height<=${definition}]+bestaudio/best[height<=${definition}]' " + $formattingFlags 
+        ;;
+    *)
+        formattingFlags=$formattingFlags 
+        ;;
+esac
+
+case $url in
+    *youtube.com*)
+        eval yt-dlp $formattingFlags $url
+        ;;
+    *nebula.tv*)
+        eval yt-dlp --netrc $formattingFlags $url
+        ;;
+    *patreon.com*)
+        eval yt-dlp --cookies-from-browser firefox $formattingFlags $url
+        ;;
+    *)
+        eval yt-dlp $formattingFlags $url
+        ;;
+esac || exit 1
+

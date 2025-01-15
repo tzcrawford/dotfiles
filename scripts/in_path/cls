@@ -1,0 +1,2 @@
+#!/bin/sh
+clear && ls --color=auto --group-directories-first "$@"

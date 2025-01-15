@@ -1,0 +1,7 @@
+#!/bin/sh
+# Downloads audio from a youtube video as mp3, just pass the url as the first argument when calling the script
+# usage:
+#   youtube-audio.sh "https://youtube.com/something"
+
+#youtube-dl --extract-audio --audio-format mp3 "$@"
+yt-dlp --extract-audio --audio-format mp3 "$@"
