@@ -59,9 +59,9 @@ fi
 #fi
 
 ### Start desktop environment/window manager on appropriate tty ###
-    if [ $HOSTNAME = "dirac" ] || [ $HOSTNAME = "fermi" ] || [ $HOSTNAME = "asmodeus" ]; then
+    if [ $HOSTNAME = "dirac" ] || [ $HOSTNAME = "faraday" ] || [ $HOSTNAME = "curie" ]; then
     # Key bindings
-    if which pacman ; then
+    if which pacman > /dev/null ; then
         if pacman -Q | grep xbindkeys > /dev/null 2>&1;then
             xbindkeys -f "$XDG_CONFIG_HOME"/xbindkeys/config
         fi
@@ -72,13 +72,13 @@ fi
         echo -e "dbus-update-activation-environment --systemd DBUS_SESSION_BUS_ADDRESS DISPLAY XAUTHORITY\ndunst &\nnumlockx &\nexec /usr/bin/i3" > ~/.xinitrc
         startx
     elif [ "$(tty)" = "/dev/tty2" ]; then
-        #if [ "$USER" = "paul" ] ; then echo "exec cinnamon-session" > ~/.xinitrc ; startx ; fi
+        if [ "$USER" = "paul" ] ; then echo "exec cinnamon-session" > ~/.xinitrc ; startx ; fi
         #echo "dunst &\nnumlockx &\nexec /usr/bin/bspwm" > ~/.xinitrc #bspwm
         #echo -e "dunst &\nnumlockx &\nwhile true; do exec /usr/bin/dwm 2> /dev/null;done" > ~/.xinitrc #dwm
         #startx
-        numlockx & 
-        sway
-        :
+        #numlockx & 
+        #sway
+        #:
     elif [ "$(tty)" = "/dev/tty5" ]; then
         #if [ "$USER" = "paul" ] ; then Hyprland ; fi
         :
