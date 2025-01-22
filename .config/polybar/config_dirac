@@ -74,8 +74,8 @@ module-margin-right = 1
 ;landau
 font-0 = EnvyCodeR:style=bold:pixelsize=15:antialias=true;1
 
-font-1 = FontAwesome6Free:style=Solid:antialias=false:pixelsize = 4;2
-font-2 = FontAwesome6Brands:style=Solid:antialias=false:pixelsize= 4;2
+font-1 = FontAwesome6Free:style=Solid:antialias=false:pixelsize=14;2
+font-2 = FontAwesome6Brands:style=Solid:antialias=false:pixelsize=14;2
 
 modules-left = xkeyboard i3
 modules-center = 
