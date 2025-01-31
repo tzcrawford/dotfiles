@@ -424,16 +424,26 @@ let g:syntastic_stl_format = "[Syntax! line: %F | %E{Total Errors: %e} | %W{Tota
 nnoremap <leader><C-j> :lnext<CR>
 nnoremap <leader><C-k> :lprevious<CR>
 
+" svelte settings: https://github.com/evanleck/vim-svelte
+" Disable extra indent in style and script tags in svelte
+" For ale linting be sure to install with npm svelte-language-server, typescript-svelte-plugins
+let g:svelte_indent_script = 0
+let g:svelte_indent_style = 0
+let g:svelte_preprocessor_tags = [ { 'name': 'ts', 'tag': 'script', 'as': 'typescript' } ]
+let g:svelte_preprocessors = ['typescript']
+
 "ALE Linting
 " Here we only want to enable ALE linting for a particular set of filetypes
 let g:ale_enabled = 1
-let fts = ['cs','sh','python','javascript']
+let fts = ['cs','sh','python','javascript', 'svelte']
 if index(fts, &filetype) == -1
     " Could not find current file type in list fts above
     let g:ale_enabled = 0
 endif
 nnoremap <F9> :ALEToggle<CR> " Have ALE turn on/off on F9 keypress
-let g:ale_linters = {'cs': ['OmniSharp'], 'javascript': ['eslint']}
+"let g:ale_linter_aliases = ['svelte']
+let g:ale_linter_aliases = {'svelte': ['svelte']}
+let g:ale_linters = {'cs': ['OmniSharp'], 'svelte': ['svelteserver'], 'javascript': ['eslint'], 'typescript': ['eslint']}
 "disable text at the end of lines
 let g:ale_virtualtext_cursor = 'disabled'
 "let g:ale_sign_error = '>>'
@@ -449,6 +459,11 @@ let g:ale_sign_warning = '-'
 let g:ale_set_highlights = 0
 "Hightlight errors with one color
 "highlight ALEWarning ctermbg=DarkMagenta
+
+" Clean up file code formatting
+let g:ale_fixers = { 'svelte': ['prettier','eslint'], 'javascript': ['prettier','eslint'], 'typescript': ['prettier','eslint'] }
+"let g:ale_fix_on_save = 1 " Would fix when you save file.
+nnoremap <F8> :ALEFix<CR> " Apply fixer on keypress
 
 "OMNISHARP PLUGIN SETTINGS
 "Bug installing?
