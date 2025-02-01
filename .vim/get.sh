@@ -1,7 +1,6 @@
 #!/bin/bash
 #installs vim addons
 VIMDIR=~/.vim/
-mkdir $VIMDIR/bundle
 
 # using pathogen to install addons!
 mkdir "$VIMDIR/autoload" > /dev/null 2>&1
@@ -55,6 +54,9 @@ pluginArray+=("evanleck/vim-svelte")
 
 # install omnisharp for c#/c++/unity
 pluginArray+=("OmniSharp/omnisharp-vim")
+
+# install vim-tailwind for autocompleting tailwind classes without requiring working language server
+pluginArray+=("airblade/vim-tailwind")
 
 #install vim-mathematica for mathematica support
 #pluginArray+=("rsmenon/vim-mathematica")

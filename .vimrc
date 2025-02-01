@@ -338,7 +338,10 @@ inoremap <expr> <CR> pumvisible() ? '<C-e><CR>' : '<CR>'
 "Likewise, manually spawn *syntax* autocomplete menu with a CTRL+l in insertmode. 
 "This is necessary for filling object attributes/methods in python etc. 
 "Autocomplpop does not fill starting on period.
-inoremap <expr> <C-l> pumvisible() ? '<CR>' : '<C-x><C-o>' "Use this instead of above
+"inoremap <expr> <C-l> pumvisible() ? '<CR>' : '<C-x><C-o>' 
+"If auto completing for tailwind we use <C-y> instead of <CR> as to prevent new line character from being entered. The new line does not generally happen with omnifucn, but sometimes does with completefunc.
+inoremap <expr> <C-l> pumvisible() ? ( &completefunc == 'tailwind#Complete' ? "\<C-y>" : "\<CR>" ) : "\<C-x>\<C-o>"
+
 
 "Or Ctrl+u to switch from dictionary recommendation to *syntax* recommendations
 inoremap <expr> <C-u> pumvisible() ? '<C-e><C-x><C-o>' : '<C-x><C-o>'
@@ -352,9 +355,26 @@ inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<Up>"
 set pumheight=8 "how many recommendations to give default is all space (100?)
 
 
+"The following sets up vim-tailwind
+function! s:is_tailwind()
+  return !empty(findfile('tailwind.config.js', '.;')) ||
+       \ !empty(findfile('config/tailwind.config.js', '.;'))
+endfunction
+"autocmd BufEnter *.html,*.slim,*.svelte,*.js,*.ts if s:is_tailwind() |
+"      \     setlocal omnifunc=tailwind#Complete |
+"      \ endif
+nmap <silent> <buffer> gt <Plug>(tailwind-lookup) " Look up the details on hovered tailwind class
+" This keybind (,t) will enter tailwind completion mode. Note we could at some point use a different completefunc so I set it here in the moment for the keybind.
+setlocal completefunc=tailwind#Complete
+nnoremap <leader>t :setlocal completefunc=tailwind#Complete<CR>lvb<ESC>ewi<C-x><C-u>
+inoremap <C-\>t <Esc>:setlocal completefunc=tailwind#Complete<CR>lvb<ESC>ewi<C-x><C-u>
+" This would work for general completefunc if not the tailwind one
+inoremap <C-\>l <Esc>lvb<ESC>ewi<C-x><C-u>
+
+
+
 "LANGUAGE-SPECIFIC AUTOCOMPLETION POPUPS
 function! s:on_lsp_buffer_enabled() abort
-    "setlocal omnifunc=lsp#complete
     set omnifunc=lsp#complete
     "setlocal signcolumn=yes
     nmap <buffer> gi <plug>(lsp-definition) " Go to definition
@@ -380,6 +400,9 @@ let g:lsp_preview_autoclose = 1 " Opens preview windows as floating
 "let g:lsp_peek_alignment = 'bottom' " How to align the location of interest for :LspPeekDefinition as an example ... not working?
 
 let g:lsp_semantic_enabled = 1 " Semantic highlighting
+
+
+"vim-tailwind allows completing tailwind classes without a functioning lsp
 
 
 
