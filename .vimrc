@@ -466,7 +466,7 @@ endif
 nnoremap <F9> :ALEToggle<CR> " Have ALE turn on/off on F9 keypress
 "let g:ale_linter_aliases = ['svelte']
 let g:ale_linter_aliases = {'svelte': ['svelte']}
-let g:ale_linters = {'cs': ['OmniSharp'], 'svelte': ['svelteserver'], 'javascript': ['eslint'], 'typescript': ['eslint']}
+let g:ale_linters = { 'cs': ['OmniSharp'], 'svelte': ['svelteserver'], 'javascript': ['eslint'], 'typescript': ['eslint'], 'css': ['eslint'], 'html': ['eslint'] }
 "disable text at the end of lines
 let g:ale_virtualtext_cursor = 'disabled'
 "let g:ale_sign_error = '>>'
@@ -484,7 +484,7 @@ let g:ale_set_highlights = 0
 "highlight ALEWarning ctermbg=DarkMagenta
 
 " Clean up file code formatting
-let g:ale_fixers = { 'svelte': ['prettier','eslint'], 'javascript': ['prettier','eslint'], 'typescript': ['prettier','eslint'] }
+let g:ale_fixers = { 'svelte': ['prettier','eslint'], 'javascript': ['prettier','eslint'], 'typescript': ['prettier','eslint'], 'css': ['prettier','eslint'], 'html': ['prettier','eslint'] }
 "let g:ale_fix_on_save = 1 " Would fix when you save file.
 nnoremap <F8> :ALEFix<CR> " Apply fixer on keypress
 
