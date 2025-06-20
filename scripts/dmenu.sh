@@ -42,7 +42,7 @@ while getopts 'ogbvryp:' OPTION ; do # Process option provided flags
             COLORS=('#2c2c2e' '#ff2222' '#040404' '#ff0000' '#272729') # Red
             ;;
         y) # Sets color
-            COLORS=('#2c2c2e' '#ff944d' '#040404' '#ff6600' '#272729') # Yellow
+            COLORS=('#2c2c2e' '#c6cc5e' '#040404' '#eaf51e' '#272729') # Yellow
             ;;
         p) # Gives prompt
             PROMPT=$OPTARG
