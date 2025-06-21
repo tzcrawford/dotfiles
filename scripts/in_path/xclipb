@@ -1,2 +1,6 @@
 #!/bin/sh
-xclip -selection clipboard "$@"
+if env | grep "WAYLAND_DISPLAY" > /dev/null ; then
+    wl-copy "$@"
+else
+    xclip -selection clipboard "$@"
+fi
