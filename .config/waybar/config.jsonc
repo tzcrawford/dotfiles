@@ -79,7 +79,7 @@
     },
     "clock": {
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        "format": "{:L%Y-%m-%d %a %I:%M}"
+        "format": "{:L%Y-%m-%d %a %H:%M}"
     },
     "cpu": {
         "format": "  {usage}%",
