@@ -29,5 +29,9 @@ while pacman -Qdt > /dev/null; do
         sudo pacman -R $(pacman -Qdt | awk '{ print $1 }')
 done
 
+if [ "$XDG_CURRENT_DESKTOP" = "Hyprland" ] ; then
+    hyprpm update
+fi
+
 #show some system stats
 neofetch
