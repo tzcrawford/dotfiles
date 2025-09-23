@@ -4,6 +4,7 @@ VIMDIR=~/.vim/
 
 # using pathogen to install addons!
 mkdir "$VIMDIR/autoload" > /dev/null 2>&1
+mkdir "$VIMDIR/bundle" > /dev/null 2>&1
 cd "$VIMDIR/autoload"
 git clone https://github.com/tpope/vim-pathogen.git
 mv vim-pathogen/autoload/pathogen.vim "$VIMDIR/autoload/"
