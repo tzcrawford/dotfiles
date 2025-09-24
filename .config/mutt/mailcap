@@ -1,0 +1,17 @@
+text/plain; vim %s ;
+#The --target window will force the html document to open in a new window (on your current workspace)
+#text/html; surf %s ;
+#text/html; mv %s %s.html && qutebrowser --target window %s.html;
+text/html; mv %s %s.html && qutebrowser %s.html;
+#text/html; w3m -I %{charset} -T text/html; copiousoutput;
+image/*; setsid sxiv '%s' ; copiousoutput
+video/*; setsid mpv --quiet '%'s &; copiousoutput
+#application/pdf; setsid zathura %s >/dev/null 2>&1;
+application/pgp-encrypted; gpg -d '%s'; copiousoutput;
+application/pdf; zathura '%s' ;
+application/oxps; zathura '%s' ;
+application/epub_zip; zathura '%s' ;
+application/vnd.oasis.opendocument.text; libreoffice '%s' ;
+application/vnd.openxmlformats-officedocument.wordprocessingml.document; libreoffice '%s' ;
+application/msword; libreoffice '%s' ;
+

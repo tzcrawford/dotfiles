@@ -13,6 +13,7 @@
 xdg-mime default zathura.desktop application/pdf application/oxps application/epub_zip applica/pdf 
 xdg-mime default sxiv.desktop image/png image/jpeg
 xdg-mime default mpv.desktop video/x-matroska video/mp4 video/x-msvideo video/webm video/x-flv video/quicktime video/x-ms-wmv video/MP2T application/x-mpegURL video/3gpp audio/aiff audio/midi audio/mpeg audio/mpeg3 audio/basic audio/wav
+xdg-mime default libreoffice-writer.desktop application/vnd.openxmlformats-officedocument.wordprocessingml.document application/msword application/vnd.oasis.opendocument.text
 if [ $BROWSER = "" ] ; then
     xdg-mime default qutebrowser.desktop text/html message/rfc822
 fi
