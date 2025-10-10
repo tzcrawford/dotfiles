@@ -7,8 +7,7 @@
     // Choose the order of the modules
     "modules-left": ["hyprland/workspaces", "hyprland/submap"],
     "modules-center": ["hyprland/window"],
-    //"modules-right": ["tray", "privacy", "mpd", "temperature", "cpu", "memory", "custom/vram", "disk","network", "pulseaudio", "backlight", "keyboard-state", "battery", "battery#bat2", "clock"],
-    "modules-right": ["tray", "privacy", "mpd", "temperature", "cpu", "memory", "custom/vram", "disk","network", "pulseaudio", "backlight", "battery", "battery#bat2", "clock"],
+    "modules-right": ["tray", "mpd", "temperature", "cpu", "memory","network", "pulseaudio", "backlight", "keyboard-state", "battery", "battery#bat2", "clock"],
      //Modules configuration
      "hyprland/workspaces": {
          "all-outputs": true,
@@ -44,11 +43,9 @@
         "separate-outputs": true
     },
     "mpd": {
-        //"format": " {artist} - {title}  {stateIcon} <small>[{elapsedTime:%M:%S}/{totalTime:%M:%S}]</small> {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}<small>[{songPosition}/{queueLength}]</small>",
-        "format": "{artist} - {title}  {stateIcon} <small>[{elapsedTime:%M:%S}/{totalTime:%M:%S}]</small> {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}<small>[{songPosition}/{queueLength}]</small>",
-        "format-disconnected": " Disconnected",
-        //"format-stopped": " {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}Stopped",
-        "format-stopped": " Stopped",
+        "format": "🎵 {artist} - {title}  {stateIcon} <small>[{elapsedTime:%M:%S}/{totalTime:%M:%S}]</small> {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}<small>[{songPosition}/{queueLength}]</small>",
+        "format-disconnected": " Disconnected",
+        "format-stopped": " {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}Stopped",
         "unknown-tag": "N/A",
         "interval": 2,
         "consume-icons": {
@@ -65,10 +62,8 @@
             "on": "1 "
         },
         "state-icons": {
-            "playing": "",
             "paused": "",
-            "stopped": "",
-            "disconnected": ""
+            "playing": ""
         },
         "tooltip-format": "MPD (connected)",
         "tooltip-format-disconnected": "MPD (disconnected)",
@@ -88,29 +83,18 @@
     },
     "cpu": {
         "format": "  {usage}%",
-        "interval": 5
+//        "tooltip": false
     },
     "memory": {
-        //"format": "  {}%"
-        //"format": "\uf2db {}%"
-        "format": "\uf538 {}%",
-        "interval": 5
+        "format": "  {}%"
     },
-    "disk": {
-        "format": "\uf0a0  {}%",
-        //"format": "\uf013 {}%"
-        //"format": "\uf1c9 {}%"
-        "interval": 5
-    },
-
     "temperature": {
         "thermal-zone": 2,
         "hwmon-path": "/sys/class/hwmon/hwmon1/temp1_input",
         "critical-threshold": 80,
         "format-critical": "{icon} {temperatureC}°C",
         "format": "{icon} {temperatureC}°C",
-        "format-icons": ["", "", ""],
-        "interval": 5
+        "format-icons": ["", "", ""]
     },
     "backlight": {
         "device": "acpi_video1",
@@ -141,8 +125,7 @@
         "format-icons": {
             "locked": "",
             "unlocked": ""
-        },
-        //"device-path": "/dev/input/event3"
+        }
     },
     "network": {
         // "interface": "wlp2*", // (Optional) To force the use of this interface
@@ -162,26 +145,15 @@
         "format-source": " {volume}%",
         "format-source-muted": "",
         "format-icons": {
-            "headphone": "",
-            "hands-free": "",
-            "headset": "",
-            "phone": "",
-            "portable": "",
-            "car": "",
+//            "headphone": "",
+//            "hands-free": "",
+//            "headset": "",
+//            "phone": "",
+//            "portable": "",
+//            "car": "",
             "default": ["", "", ""]
-            //"default": ["\uf028"]
-            //"default": ["🔊"]
-            //"default": ["\uf025"]
         },
         "on-click": "pavucontrol",
         "on-click-right": "foot -a pw-top pw-top"
     },
-    "custom/vram": {
-        "exec": "/home/paul/scripts/in_terminal/gpustats.sh",
-        "format": "{icon} {text}",
-        "format-icons": {
-            "default": "\uf03e"
-        },
-        "interval": 5
-}
 }
