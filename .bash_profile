@@ -69,16 +69,15 @@ fi
 
     if [ "$(tty)" = "/dev/tty1" ]; then
         # Remember to put background programs in the line before executing the window manager.
+        numlockx &
+        #Hyprland
+        start-hyprland
+    elif [ "$(tty)" = "/dev/tty2" ]; then
         echo -e "dbus-update-activation-environment --systemd DBUS_SESSION_BUS_ADDRESS DISPLAY XAUTHORITY\ndunst &\nnumlockx &\nexec /usr/bin/i3" > ~/.xinitrc
         startx
-    elif [ "$(tty)" = "/dev/tty2" ]; then
-        if [ "$USER" = "paul" ] ; then echo "exec cinnamon-session" > ~/.xinitrc ; startx ; fi
-        #echo "dunst &\nnumlockx &\nexec /usr/bin/bspwm" > ~/.xinitrc #bspwm
-        #echo -e "dunst &\nnumlockx &\nwhile true; do exec /usr/bin/dwm 2> /dev/null;done" > ~/.xinitrc #dwm
-        #startx
-        #numlockx & 
-        #sway
-        #:
+    elif [ "$(tty)" = "/dev/tty3" ]; then
+        #if [ "$USER" = "paul" ] ; then echo "exec cinnamon-session" > ~/.xinitrc ; startx ; fi
+        :
     elif [ "$(tty)" = "/dev/tty5" ]; then
         #if [ "$USER" = "paul" ] ; then Hyprland ; fi
         :
