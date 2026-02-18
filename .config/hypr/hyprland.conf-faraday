@@ -334,8 +334,8 @@ binde = $mainMod       ,F11 , exec , sh $scripts/themes/hypr_gap_setter.sh --zer
 binde = $mainMod SHIFT ,F11 , exec , sh $scripts/themes/hypr_gap_setter.sh --reset_gaps
 
 # Example special workspace (scratchpad)
-bind = $mainMod, x, togglespecialworkspace, magic
-bind = $mainMod SHIFT, x, movetoworkspace, special:magic
+#bind = $mainMod, x, togglespecialworkspace, magic
+#bind = $mainMod SHIFT, x, movetoworkspace, special:magic
 
 # Scroll through existing workspaces with mainMod + scroll
 bind = $mainMod, mouse_down, workspace, e+1
