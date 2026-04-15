@@ -59,6 +59,9 @@ pluginArray+=("OmniSharp/omnisharp-vim")
 # install vim-tailwind for autocompleting tailwind classes without requiring working language server
 pluginArray+=("airblade/vim-tailwind")
 
+# install vim-godot for gdscript 
+pluginArray+=("habamax/vim-godot")
+
 #install vim-mathematica for mathematica support
 #pluginArray+=("rsmenon/vim-mathematica")
 

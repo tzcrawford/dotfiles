@@ -371,6 +371,28 @@ inoremap <C-\>t <Esc>:setlocal completefunc=tailwind#Complete<CR>lvb<ESC>ewi<C-x
 " This would work for general completefunc if not the tailwind one
 inoremap <C-\>l <Esc>lvb<ESC>ewi<C-x><C-u>
 
+"The following sets up Godot / GDScript support via Godot's built-in language server ( godot must be running )
+if executable('nc')
+    augroup godot_lsp
+        autocmd!
+        autocmd User lsp_setup call lsp#register_server({
+              \ 'name': 'godot',
+              \ 'cmd': {server_info->['nc', '127.0.0.1', '6005']},
+              \ 'allowlist': ['gdscript'],
+              \ })
+        autocmd FileType gdscript call s:on_lsp_buffer_enabled()
+    augroup END
+endif
+"The following allows running godot from vim using vim-godot
+function! GodotSettings() abort
+    nnoremap <buffer> <F4> :GodotRunLast<CR>
+    nnoremap <buffer> <F5> :GodotRun<CR>
+    nnoremap <buffer> <F6> :GodotRunCurrent<CR>
+endfunction
+augroup godot_plugin
+    autocmd!
+    autocmd FileType gdscript call GodotSettings()
+augroup END
 
 
 "LANGUAGE-SPECIFIC AUTOCOMPLETION POPUPS
@@ -494,7 +516,7 @@ nnoremap <F8> :ALEFix<CR> " Apply fixer on keypress
 "https://github.com/OmniSharp/omnisharp-vim/issues/766
 
 "filetype indent plugin on "This was said to be required? I think Omnisharp said it was needed if not using a plugin manager
-filetype indent plugin off "I need to turn it off to get indentexpr declaration to apply
+filetype indent off "I need to turn indent off to get indentexpr declaration to apply
 
 "syntax enable "already done above...
 "let g:OmniSharp_start_server = 0 "disable plugin
