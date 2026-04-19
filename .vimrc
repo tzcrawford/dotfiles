@@ -393,6 +393,8 @@ augroup godot_plugin
     autocmd!
     autocmd FileType gdscript call GodotSettings()
 augroup END
+" Fix indent problems in gdscript
+autocmd FileType gdscript setlocal expandtab shiftwidth=4 softtabstop=4 tabstop=4
 
 
 "LANGUAGE-SPECIFIC AUTOCOMPLETION POPUPS
