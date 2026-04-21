@@ -80,10 +80,13 @@ gpu-context=wayland
 
 
 
-# Font size
-osd-font-size=50 # UI
-sub-font-size=50 # Subtitle
-
+# Font
+osd-font-size=40 # UI
+sub-font-size=40 # Subtitle
+osd-font="Envy Code R"
+sub-font="Envy Code R"
+osd-shadow-offset=1
+sub-shadow-offset=1
 
 ##################
 # audio settings #
