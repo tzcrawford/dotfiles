@@ -14,9 +14,8 @@ xdg-mime default zathura.desktop application/pdf application/oxps application/ep
 xdg-mime default nsxiv.desktop image/png image/jpeg
 xdg-mime default mpv.desktop video/x-matroska video/mp4 video/x-msvideo video/webm video/x-flv video/quicktime video/x-ms-wmv video/MP2T application/x-mpegURL video/3gpp audio/aiff audio/midi audio/mpeg audio/mpeg3 audio/basic audio/wav
 xdg-mime default libreoffice-writer.desktop application/vnd.openxmlformats-officedocument.wordprocessingml.document application/msword application/vnd.oasis.opendocument.text
-if [ $BROWSER = "" ] ; then
-    xdg-mime default qutebrowser.desktop text/html message/rfc822
-fi
+xdg-mime default qutebrowser.desktop text/html message/rfc822
+
 #xdg-settings set default-web-browser org.qutebrowser.qutebrowser.desktop #seems to be a fix issues with http links resorting to other browsers
 
 # These allow installed electron apps to open links in qutebrowser.
