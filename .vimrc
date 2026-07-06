@@ -7,6 +7,11 @@ if has('win32') || has('win64')
     set t_vb=
     "gvim font
     set guifont=Cascadia_Code:h16
+
+    " Disable viminfo only on this machine because network drive causing errors.
+    if $COMPUTERNAME ==? 'VDI-zcrawford'
+        set viminfofile=NONE
+    endif
 endif
 
 
