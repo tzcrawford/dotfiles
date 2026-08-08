@@ -132,7 +132,7 @@ if hostname == "dirac" then
         supports_wide_color = 0,
         supports_hdr = 0,
     })
-else if hostname == "faraday"
+elseif hostname == "faraday" then
     monitor1 = "HDMI-A-1"
     hl.monitor({
         output = monitor1,
@@ -150,7 +150,7 @@ else if hostname == "faraday"
         max_luminance = 300,
         max_avg_luminance = 300,
     })
-else if hostname == "curie"
+elseif hostname == "curie" then
     monitor1 = "eDP-1"
     monitor2 = "HDMI-A-1"
     monitorv2 {
@@ -164,7 +164,7 @@ else if hostname == "curie"
         supports_hdr = 0,
     }
     monitorv2 {
-        output = $monitor2,
+        output = monitor2,
         mode = "1366x768@60Hz",
         --position = "1921x0",
         position = "auto",
@@ -696,7 +696,7 @@ hl.window_rule({
 -- Workspace rules
 -----------------------------------------------------------------------------
 
-if hostname == "dirac"
+if hostname == "dirac" then
     hl.workspace_rule({ workspace = "1", monitor = monitor1 })
     hl.workspace_rule({ workspace = "2", monitor = monitor1 })
     hl.workspace_rule({ workspace = "3", monitor = monitor2 })
