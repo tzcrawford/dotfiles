@@ -24,6 +24,18 @@
 -- Programs and definitions
 -----------------------------------------------------------------------------
 
+local user = os.getenv("USER") or os.getenv("LOGNAME") or "unknown"
+
+local hostname = os.getenv("HOSTNAME")
+if not hostname then
+    local handle = io.popen("hostname")
+    if handle then
+        hostname = handle:read("*l")
+        handle:close()
+    end
+end
+hostname = hostname or "unknown"
+
 local home = os.getenv("HOME") or "~"
 local scripts = home .. "/scripts"
 
@@ -76,44 +88,89 @@ local color15 = "rgb({color15.strip})"
 -- Monitors
 -----------------------------------------------------------------------------
 
-local monitor1 = "DP-1"
-local monitor2 = "DP-3"
-local monitor3 = "DP-2"
+local monitor1
+local monitor2
+local monitor3
 
-hl.monitor({
-    output = monitor1,
-    mode = "2560x1440@164.80",
-    position = "0x1080",
-    scale = 1.066,
-    transform = 0,
-    bitdepth = 10,
-    supports_wide_color = 1,
-    supports_hdr = 1,
-    sdr_max_luminance = 200,
-    min_luminance = 0.005,
-    max_luminance = 300,
-    max_avg_luminance = 300,
-})
-
-hl.monitor({
-    output = monitor2,
-    mode = "1920x1080@119.98",
-    position = "640x0",
-    scale = 1.0,
-    transform = 0,
-    supports_wide_color = 0,
-    supports_hdr = 0,
-})
-
-hl.monitor({
-    output = monitor3,
-    mode = "1920x1080@60.00",
-    position = "2560x0",
-    scale = 1.0,
-    transform = 0,
-    supports_wide_color = 0,
-    supports_hdr = 0,
-})
+if hostname == "dirac" then
+    monitor1 = "DP-1"
+    monitor2 = "DP-3"
+    monitor3 = "DP-2"
+    
+    
+    hl.monitor({
+        output = monitor1,
+        mode = "2560x1440@164.80",
+        position = "0x1080",
+        scale = 1.066,
+        transform = 0,
+        bitdepth = 10,
+        supports_wide_color = 1,
+        supports_hdr = 1,
+        sdr_max_luminance = 200,
+        min_luminance = 0.005,
+        max_luminance = 300,
+        max_avg_luminance = 300,
+    })
+    
+    hl.monitor({
+        output = monitor2,
+        mode = "1920x1080@119.98",
+        position = "640x0",
+        scale = 1.0,
+        transform = 0,
+        supports_wide_color = 0,
+        supports_hdr = 0,
+    })
+    
+    hl.monitor({
+        output = monitor3,
+        mode = "1920x1080@60.00",
+        position = "2560x0",
+        scale = 1.0,
+        transform = 0,
+        supports_wide_color = 0,
+        supports_hdr = 0,
+    })
+else if hostname == "faraday"
+    monitor1 = "HDMI-A-1"
+    hl.monitor({
+        output = monitor1,
+        mode = "3840x2160@60.0",
+        --mode = "1920x1080@60.0",
+        position = "0x0",
+        scale = 2.4,
+        --scale = 1,
+        transform = 0,
+        bitdepth = 10,
+        supports_wide_color = 1,
+        supports_hdr = 1,
+        sdr_max_luminance = 200,
+        min_luminance = 1,
+        max_luminance = 300,
+        max_avg_luminance = 300,
+    })
+else if hostname == "curie"
+    monitor1 = "eDP-1"
+    monitor2 = "HDMI-A-1"
+    monitorv2 {
+        output = monitor1,
+        mode = "1920x1200@60.00",
+        position = "0x0",
+        scale = 1,
+        transform = 0,
+        bitdepth = 10,
+        supports_wide_color = 0,
+        supports_hdr = 0,
+    }
+    monitorv2 {
+        output = $monitor2,
+        mode = "1366x768@60Hz",
+        --position = "1921x0",
+        position = "auto",
+        scale = 1,
+    }
+end
 
 -----------------------------------------------------------------------------
 -- Environment
@@ -639,16 +696,18 @@ hl.window_rule({
 -- Workspace rules
 -----------------------------------------------------------------------------
 
-hl.workspace_rule({ workspace = "1", monitor = monitor1 })
-hl.workspace_rule({ workspace = "2", monitor = monitor1 })
-hl.workspace_rule({ workspace = "3", monitor = monitor2 })
-hl.workspace_rule({ workspace = "12", monitor = monitor2 })
-hl.workspace_rule({ workspace = "8", monitor = monitor3 })
-hl.workspace_rule({ workspace = "9", monitor = monitor3 })
-hl.workspace_rule({ workspace = "10", monitor = monitor3 })
-hl.workspace_rule({ workspace = "11", monitor = monitor3 })
-hl.workspace_rule({ workspace = "20", monitor = monitor3 })
-hl.workspace_rule({ workspace = "21", monitor = monitor3 })
+if hostname == "dirac"
+    hl.workspace_rule({ workspace = "1", monitor = monitor1 })
+    hl.workspace_rule({ workspace = "2", monitor = monitor1 })
+    hl.workspace_rule({ workspace = "3", monitor = monitor2 })
+    hl.workspace_rule({ workspace = "12", monitor = monitor2 })
+    hl.workspace_rule({ workspace = "8", monitor = monitor3 })
+    hl.workspace_rule({ workspace = "9", monitor = monitor3 })
+    hl.workspace_rule({ workspace = "10", monitor = monitor3 })
+    hl.workspace_rule({ workspace = "11", monitor = monitor3 })
+    hl.workspace_rule({ workspace = "20", monitor = monitor3 })
+    hl.workspace_rule({ workspace = "21", monitor = monitor3 })
+end
 
 -----------------------------------------------------------------------------
 -- Application workspace rules
