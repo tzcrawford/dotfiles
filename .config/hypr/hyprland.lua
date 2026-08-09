@@ -153,7 +153,7 @@ elseif hostname == "faraday" then
 elseif hostname == "curie" then
     monitor1 = "eDP-1"
     monitor2 = "HDMI-A-1"
-    monitorv2 {
+    hl.monitor({
         output = monitor1,
         mode = "1920x1200@60.00",
         position = "0x0",
@@ -162,14 +162,14 @@ elseif hostname == "curie" then
         bitdepth = 10,
         supports_wide_color = 0,
         supports_hdr = 0,
-    }
-    monitorv2 {
+    })
+    hl.monitor({
         output = monitor2,
         mode = "1366x768@60Hz",
         --position = "1921x0",
         position = "auto",
         scale = 1,
-    }
+    })
 end
 
 -----------------------------------------------------------------------------
