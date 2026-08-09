@@ -353,6 +353,14 @@ hl.config({
     },
 })
 
+-- mouse sense only for this machine
+if hostname == "curie" then
+    hl.device({
+        name = "benq-zowie-benq-zowie-gaming-mouse",
+        sensitivity = -0.4,
+    })
+end
+
 -----------------------------------------------------------------------------
 -- Animations
 -----------------------------------------------------------------------------
