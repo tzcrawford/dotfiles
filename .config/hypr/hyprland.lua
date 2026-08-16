@@ -795,3 +795,9 @@ hl.on("hyprland.start", function()
     hl.exec_cmd("sleep 10 && " .. scripts .. "/themes/i3_theme_slideshow.sh")
 end)
 
+hl.on("window.open", function(w)
+    if w ~= nil and w.class == "hyprland-donate-screen" then
+        hl.dispatch(hl.dsp.window.close({ window = w }))
+    end
+end)
+
