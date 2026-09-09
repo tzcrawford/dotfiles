@@ -16,10 +16,13 @@ if [ -f ~/.bash_aliases ]; then
 fi
 
 # Add to path
-export PATH=$HOME/.local/share/cargo/bin/:$PATH # rust binaries
-#export PATH=/opt/anaconda/bin/:$PATH
-export PATH=$HOME/scripts/in_path:$PATH
-export PATH=$HOME/.local/share/gem/ruby/3.0.0/bin:$PATH
+export PATH=$PATH:$HOME/.local/bin
+export PATH=$PATH:$HOME/.local/share/cargo/bin/ # rust binaries
+#export PATH=$PATH:/opt/anaconda/bin/:
+export PATH=$PATH:$HOME/.local/share/gem/ruby/3.0.0/bin
+export PATH=$PATH:$HOME/.local/podman/bin:$PATH
+#export PATH="$(npm config get prefix)/bin:$PATH"
+export PATH=$PATH:$HOME/scripts/in_path
 
 # vi mode
 set -o vi
@@ -56,8 +59,6 @@ export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[01;32m'
 
 
-export MANGOHUD=1
-
 
 # Force alacritty to recover color scheme
 if command -v wal > /dev/null 2>&1 && [ "$TERM" = "alacritty" ]; then
@@ -65,3 +66,9 @@ if command -v wal > /dev/null 2>&1 && [ "$TERM" = "alacritty" ]; then
     wal -Rqe
 fi
 
+if [ "$HOSTNAME" = "faraday" ] ; then
+    if ! ( [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ] ) ; then
+        xhost +si:localuser:$USER > /dev/null # Allow GUI applications through distrobox
+    fi
+fi
+[ -f /opt/miniconda3/etc/profile.d/conda.sh ] && source /opt/miniconda3/etc/profile.d/conda.sh
