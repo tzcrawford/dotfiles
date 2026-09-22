@@ -775,6 +775,15 @@ hl.window_rule({
     float = true,
 })
 
+hl.window_rule({
+    name = "waydroid-float",
+    match = { class = "^(\\*[Ww]aydroid\\*)$" },
+    float = true,
+    size = { 720, 1280 },
+})
+
+
+
 -----------------------------------------------------------------------------
 -- Autostart
 -----------------------------------------------------------------------------
@@ -785,12 +794,19 @@ hl.on("hyprland.start", function()
     hl.exec_cmd("hyprpaper")
     hl.exec_cmd("sleep 3 && " .. scripts .. "/no_terminal/keyboard.sh")
     hl.exec_cmd("sleep 3 && " .. scripts .. "/no_terminal/hyprland_startup.sh")
+    --hl.exec_cmd(
+    --    "sleep 20 && xrdb "
+    --    .. home
+    --    .. "/.Xresources && sleep 5 && "
+    --    .. scripts
+    --    .. "/themes/i3_theme_slideshow.sh"
+    --)
     hl.exec_cmd(
         "sleep 20 && xrdb "
         .. home
-        .. "/.Xresources && sleep 5 && "
+        .. "/.Xresources >> /tmp/hypr-startup-xrdb.log 2>&1 && echo xrdb-ok >> /tmp/hypr-startup-xrdb.log && sleep 5 && "
         .. scripts
-        .. "/themes/i3_theme_slideshow.sh"
+        .. "/themes/i3_theme_slideshow.sh >> /tmp/hypr-startup-xrdb.log 2>&1"
     )
     hl.exec_cmd("sleep 10 && " .. scripts .. "/themes/i3_theme_slideshow.sh")
 end)
