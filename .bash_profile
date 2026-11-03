@@ -58,14 +58,16 @@ fi
 #    source $HOME/perl5/perlbrew/etc/bashrc #sources perlbrew settings
 #fi
 
-### Start desktop environment/window manager on appropriate tty ###
-    if [ $HOSTNAME = "dirac" ] || [ $HOSTNAME = "faraday" ] || [ $HOSTNAME = "curie" ]; then
-    # Key bindings
-    if which pacman > /dev/null ; then
-        if pacman -Q | grep xbindkeys > /dev/null 2>&1;then
-            xbindkeys -f "$XDG_CONFIG_HOME"/xbindkeys/config
-        fi
+
+start_xbindkeys() {
+    if command -v pacman >/dev/null 2>&1 && pacman -Qq xbindkeys >/dev/null 2>&1; then
+        xbindkeys -f "${XDG_CONFIG_HOME:-$HOME/.config}/xbindkeys/config"
     fi
+}
+### Start desktop environment/window manager on appropriate tty ###
+if [ $HOSTNAME = "dirac" ] || [ $HOSTNAME = "curie" ]; then
+    # Key bindings
+    start_xbindkeys
 
     if [ "$(tty)" = "/dev/tty1" ]; then
         # Remember to put background programs in the line before executing the window manager.
@@ -75,14 +77,17 @@ fi
     elif [ "$(tty)" = "/dev/tty2" ]; then
         echo -e "dbus-update-activation-environment --systemd DBUS_SESSION_BUS_ADDRESS DISPLAY XAUTHORITY\ndunst &\nnumlockx &\nexec /usr/bin/i3" > ~/.xinitrc
         startx
-    elif [ "$(tty)" = "/dev/tty3" ]; then
-        #if [ "$USER" = "paul" ] ; then echo "exec cinnamon-session" > ~/.xinitrc ; startx ; fi
-        :
-    elif [ "$(tty)" = "/dev/tty5" ]; then
-        #if [ "$USER" = "paul" ] ; then Hyprland ; fi
-        :
     else
         :
+    fi
+elif [ $HOSTNAME = "faraday" ]; then
+    if [[ -z "$WAYLAND_DISPLAY" && -z "$DISPLAY" && "$(tty)" == "/dev/tty1" ]]; then
+        numlockx &
+        exec /usr/lib/plasma-dbus-run-session-if-needed /usr/bin/plasma-bigscreen-wayland
+    elif [ "$(tty)" = "/dev/tty2" ]; then
+        start_xbindkeys
+        numlockx &
+        start-hyprland
     fi
 fi
 
