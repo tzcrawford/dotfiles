@@ -1,0 +1,29 @@
+[general]
+import = ["~/.config/alacritty/alacritty.toml"]
+
+[window]
+opacity = 0.93
+
+[colors.primary]
+background = "#101010"
+foreground = "#f5f5f5"
+
+[colors.normal]
+black   = "#101010"
+red     = "#ff6666"
+green   = "#7fe08a"
+yellow  = "#f9df74"
+blue    = "#80bfff"
+magenta = "#df9aff"
+cyan    = "#78e0e0"
+white   = "#e6e6e6"
+
+[colors.bright]
+black   = "#666666"
+red     = "#ff9999"
+green   = "#aaffaa"
+yellow  = "#fff0a0"
+blue    = "#aaccff"
+magenta = "#efbaff"
+cyan    = "#aaffff"
+white   = "#ffffff"

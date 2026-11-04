@@ -61,7 +61,7 @@ export LESS_TERMCAP_us=$'\E[01;32m'
 
 
 # Force alacritty to recover color scheme
-if command -v wal > /dev/null 2>&1 && [ "$TERM" = "alacritty" ]; then
+if [[ "${ALACRITTY_NO_PYWAL:-0}" != "1" ]] && command -v wal >/dev/null 2>&1 && [[ "$TERM" == "alacritty" ]]; then
     # Run 'wal' command with options to recover color scheme, ignore output, and ignore updating other apps
     wal -Rqe
 fi
