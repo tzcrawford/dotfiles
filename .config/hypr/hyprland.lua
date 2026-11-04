@@ -41,6 +41,7 @@ local scripts = home .. "/scripts"
 
 local font = "EnvyCodeR"
 local terminal = "alacritty"
+local terminal_high_contrast = scripts .. "/no_terminal/alacritty_no_pywal.sh"
 local fileManager = "thunar"
 local audioMixer = "pavucontrol"
 local music = scripts .. "/no_terminal/musicplayer.sh"
@@ -493,6 +494,7 @@ hl.bind("CTRL + q", exec(home .. "/scripts/nothing.sh"))
 
 -- Launchers
 hl.bind(mainMod .. " + Return", exec(terminal))
+hl.bind(mainMod .. " + SHIFT + Return", exec(terminal_high_contrast))
 hl.bind(mainMod .. " + ALT + grave", exec("dunstctl close-all"))
 hl.bind(mainMod .. " + ALT + Space", exec("dunstctl history-pop"))
 hl.bind(mainMod .. " + e", exec(fileManager))

@@ -61,9 +61,42 @@ export LESS_TERMCAP_us=$'\E[01;32m'
 
 
 # Force alacritty to recover color scheme
-if [[ "${ALACRITTY_NO_PYWAL:-0}" != "1" ]] && command -v wal >/dev/null 2>&1 && [[ "$TERM" == "alacritty" ]]; then
-    # Run 'wal' command with options to recover color scheme, ignore output, and ignore updating other apps
-    wal -Rqe
+#if [[ "${ALACRITTY_NO_PYWAL:-0}" != "1" ]] && command -v wal >/dev/null 2>&1 && [[ "$TERM" == "alacritty" ]]; then
+#    # Run 'wal' command with options to recover color scheme, ignore output, and ignore updating other apps
+#    wal -Rqe
+#fi
+if [[ "$TERM" == "alacritty" && "${ALACRITTY_NO_PYWAL:-0}" != "1" ]]; then
+    wal_cache="$HOME/.cache/wal/sequences"
+
+    # Apply the current palette to this terminal.
+    if [[ -f "$wal_cache" ]]; then
+        cat "$wal_cache"
+    fi
+
+    # Start only one watcher per terminal shell hierarchy.
+    if [[ "${ALACRITTY_WAL_WATCHER:-0}" != "1" ]]; then
+        export ALACRITTY_WAL_WATCHER=1
+
+        wal_tty=$(tty)
+        wal_owner_pid=$BASHPID
+
+        if [[ "$wal_tty" == /dev/pts/* ]]; then
+            (
+                previous=$(stat -Lc '%y:%s' "$wal_cache" 2>/dev/null)
+
+                while kill -0 "$wal_owner_pid" 2>/dev/null; do
+                    sleep 1
+                    current=$(stat -Lc '%y:%s' "$wal_cache" 2>/dev/null)
+
+                    if [[ -n "$current" && "$current" != "$previous" ]]; then
+                        cat "$wal_cache" > "$wal_tty"
+                        previous="$current"
+                    fi
+                done
+            ) </dev/null >/dev/null 2>&1 &
+            disown
+        fi
+    fi
 fi
 
 if [ "$HOSTNAME" = "faraday" ] ; then
