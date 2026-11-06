@@ -1,2 +1,3 @@
 #!/bin/sh
-readlink -zf "$@"
+#readlink -zf "$@"
+readlink -f "$@" | tr -d '\n'
