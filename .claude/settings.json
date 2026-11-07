@@ -5,20 +5,6 @@
     "sessionUrl": false
   },
   "model": "opus",
-  "hooks": {
-    "PostToolUse": [
-      {
-        "matcher": "Bash",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "/home/paul/scripts/git_add_assist_claude.sh",
-            "if": "Bash(git commit *)"
-          }
-        ]
-      }
-    ]
-  },
   "enabledPlugins": {
     "qmd@qmd": true
   },
