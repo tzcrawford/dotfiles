@@ -4,7 +4,7 @@
     "pr": "",
     "sessionUrl": false
   },
-  "model": "sonnet",
+  "model": "opus",
   "hooks": {
     "PostToolUse": [
       {
@@ -27,12 +27,6 @@
       "source": {
         "source": "github",
         "repo": "tobi/qmd"
-      }
-    },
-    "svelte": {
-      "source": {
-        "source": "github",
-        "repo": "sveltejs/ai-tools"
       }
     }
   },
