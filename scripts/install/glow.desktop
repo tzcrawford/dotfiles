@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Glow (Alacritty)
+Exec=alacritty -e glow -p %f
+Terminal=false
+MimeType=text/markdown;text/x-markdown;
+Categories=Utility;Viewer;
+NoDisplay=true

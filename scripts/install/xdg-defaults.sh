@@ -22,6 +22,12 @@ xdg-mime default qutebrowser.desktop text/html message/rfc822
 xdg-mime default qutebrowser.desktop x-scheme-handler/http
 xdg-mime default qutebrowser.desktop x-scheme-handler/https
 
+xdg-mime default glow.desktop text/markdown
+xdg-mime default glow.desktop text/x-markdown
+
+xdg-mime default vim-alacritty.desktop text/plain
+
+
 #be aware, $APPLICATION.desktop must exist in /usr/share/applications
 #generally included with installation, but can also be manually made
 
