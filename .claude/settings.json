@@ -1,0 +1,22 @@
+{
+  "attribution": {
+    "commit": "",
+    "pr": "",
+    "sessionUrl": false
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "if": "Bash(git commit *)",
+            "command": "/home/paul/scripts/git_add_assist_claude.sh"
+          }
+        ]
+      }
+    ]
+  },
+  "theme": "auto"
+}
