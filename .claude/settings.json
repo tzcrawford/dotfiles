@@ -4,6 +4,7 @@
     "pr": "",
     "sessionUrl": false
   },
+  "model": "sonnet",
   "hooks": {
     "PostToolUse": [
       {
@@ -11,12 +12,29 @@
         "hooks": [
           {
             "type": "command",
-            "if": "Bash(git commit *)",
-            "command": "/home/paul/scripts/git_add_assist_claude.sh"
+            "command": "/home/paul/scripts/git_add_assist_claude.sh",
+            "if": "Bash(git commit *)"
           }
         ]
       }
     ]
+  },
+  "enabledPlugins": {
+    "qmd@qmd": true
+  },
+  "extraKnownMarketplaces": {
+    "qmd": {
+      "source": {
+        "source": "github",
+        "repo": "tobi/qmd"
+      }
+    },
+    "svelte": {
+      "source": {
+        "source": "github",
+        "repo": "sveltejs/ai-tools"
+      }
+    }
   },
   "theme": "auto"
 }
