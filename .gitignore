@@ -1,4 +1,6 @@
 .config/opencode/service.json
+.config/opencode/skills
+.config/opencode/skills-lock.json
 
 *.swp
 *.swo

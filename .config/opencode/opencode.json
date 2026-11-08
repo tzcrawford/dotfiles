@@ -9,9 +9,6 @@
       "effect": "ask"
     }
   ],
-  "skills": [
-    "~/.claude/plugins/cache/qmd/qmd/2.8.3/qmd"
-  ],
   "mcp": {
     "servers": {
       "svelte": {
