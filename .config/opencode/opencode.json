@@ -7,6 +7,21 @@
       "action": "external_directory",
       "resource": "*",
       "effect": "ask"
+    },
+    {
+      "action": "external_directory",
+      "resource": "$HOME/.config/opencode/skills/*",
+      "effect": "allow"
+    },
+    {
+      "action": "read",
+      "resource": "$HOME/.config/opencode/skills/*",
+      "effect": "allow"
+    },
+    {
+      "action": "edit",
+      "resource": "$HOME/.config/opencode/skills/*",
+      "effect": "deny"
     }
   ],
   "mcp": {
