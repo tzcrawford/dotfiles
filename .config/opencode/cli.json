@@ -6,5 +6,9 @@
   "session": {
     "thinking": "show",
     "permissions": "prompt"
+  },
+  "keybinds": {
+    "prompt.editor": "ctrl+g",
+    "session.first": "home,alt+home"
   }
 }
