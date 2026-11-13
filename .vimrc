@@ -1,7 +1,18 @@
+" VIM RUN COMMANDS
+" YOU CAN IMMEDIATELY APPLY ANY CHANGES TO THIS CONFIGURATION FILE BY RUNNING ':source ~/.vimrc' IN ANY VIM SESSION
+" THIS VIMRC FILE SHOULD SERVE AS A TEMPLATE AND INTRODUCTION
+"You can set the option '_____' with 'set _____'
+"You can map key presses with 'map <BUTTON> :_____' where '_____' is the command
+"You can map multiple commands to a button by feeding multiple commands separated by spaces?
+"See https://dougblack.io/words/a-good-vimrc.html for more recommendations
+
 "Need the following for this to apply in Windows I think
 if has('win32') || has('win64')
-    set runtimepath=~/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,~/.vim/after
-    "set runtimepath=C:\Users\myuser\Vim\vim90,C:\Users\myuser\.vim,U:\.vim,U:\.vim\after
+    " Windows with home on network drive is prohibitively slow, so we must move plugin code to main machine.
+    " Keep copy of vim bundle code in: C:\Users\myuser\.vim\bundle\
+    let s:vimdir = substitute($USERPROFILE, '\\', '/', 'g') . '/.vim'
+    let &runtimepath = join([s:vimdir, $VIM . '/vimfiles', $VIMRUNTIME, $VIM . '/vimfiles/after', s:vimdir . '/after'], ',')
+
     set backspace=indent,eol,start
     set vb
     set t_vb=
@@ -9,31 +20,10 @@ if has('win32') || has('win64')
     set guifont=Cascadia_Code:h16
 
     " Disable viminfo only on this machine because network drive causing errors.
-    if $COMPUTERNAME ==? 'VDI-zcrawford'
+    if $COMPUTERNAME ==? 'VDI-ZCrawford'
         set viminfofile=NONE
     endif
 endif
-
-
-" VIM RUN COMMANDS
-" YOU CAN IMMEDIATELY APPLY ANY CHANGES TO THIS CONFIGURATION FILE BY RUNNING ':source ~/.vimrc' IN ANY VIM SESSION
-" THIS VIMRC FILE SHOULD SERVE AS A TEMPLATE AND INTRODUCTION
-" NOTE THAT DOUBLE QUOTE PRECEDES A COMMENT
-" SINGLE QUOTES WILL BE USED TO REFER TO THINGS RATHER THAN DOUBLE QUOTES
-
-
-
-"VIMRC AND MACROING
-"Default settings will be saved in ~/.vimrc
-"You can change default settings by editing this file
-"You can also change vim's settings in the session of vim you are running. They will be reset to default next time you open vim
-"You can set the option '_____' with 'set _____'
-"You can map key presses with 'map <BUTTON> :_____' where '_____' is the command
-"You can map multiple commands to a button by feeding multiple commands separated by spaces?
-
-"See https://dougblack.io/words/a-good-vimrc.html for more recommendations
-
-
 
 "ENABLE THE PATHOGEN PLUGIN MANAGER
 "See https://github.com/tpope/vim-pathogen
